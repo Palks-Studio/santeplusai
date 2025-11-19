@@ -168,7 +168,13 @@ project_structure/
 ├── send_avis.php                          → Envoi d’avis (exemple) FR
 │                                          → Feedback sender (example) EN
 │
-└── server_wsgi.py                         → Entrée WSGI / Passenger (anonymisé) FR
-                                           → WSGI / Passenger entry point (anonymized) EN
+├── server_wsgi.py                         → Entrée WSGI / Passenger (anonymisé) FR
+│                                          → WSGI / Passenger entry point (anonymized) EN
+│ 
+├── robots.txt                             → Directive d’indexation Google (FR)
+│                                          → Google indexing directives (EN)
+│
+└── sitemap.xml                            → Plan du site pour moteurs de recherche (FR)
+                                           → Website sitemap for search engines (EN)
 ```
 
