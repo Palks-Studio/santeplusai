@@ -6,7 +6,7 @@
 
 ![License](https://img.shields.io/badge/License-LICENSE.txt-lightgreen.svg)
 
-# Project Overview
+🇬🇧  # Project Overview
 
 This repository presents the complete architecture of a website focused on natural wellness, designed without CMS, SaaS, cookies, or an exposed backend.
 
