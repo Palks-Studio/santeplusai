@@ -64,7 +64,7 @@ mais interagit de manière contrôlée avec les autres.
 project-root/
 │
 ├── README_FR.md                   → Présentation générale du projet et de son architecture
-├── LICENSE                        → Conditions d’utilisation et cadre juridique du projet
+├── LICENCE                        → Conditions d’utilisation et cadre juridique du projet
 │
 ├── worker/
 │    ├── main.py                   → Point d’entrée du worker (cron / déclencheur PHP)
@@ -473,21 +473,12 @@ avec un minimum de maintenance et une surface d’attaque réduite.
 
 Ce projet est une création originale de **Palks Studio**.
 
-Le code et l’architecture présentés dans ce dépôt sont fournis
-à des fins de démonstration technique et de portfolio.
-Toute réutilisation, redistribution ou exploitation publique
-sans autorisation préalable n’est pas autorisée.
+Le code, la structure et l’architecture présentés dans ce dépôt
+sont fournis à des fins de démonstration technique et de portfolio.
 
-L’usage personnel et professionnel à des fins d’évaluation,
-d’étude ou d’inspiration est autorisé.
+Toute réutilisation directe, redistribution ou exploitation publique
+de tout ou partie de ce projet, sous quelque forme que ce soit,
+est interdite sans autorisation écrite préalable.
 
-Voir le fichier LICENSE pour les conditions d’utilisation.
-
-**Palks Studio**  
-Créateur indépendant d’outils digitaux autonomes et durables.
-
-- GitHub : https://github.com/Palks-Studio  
-- Gumroad : https://palks.gumroad.com  
-- Itch.io : http://palks-studio.itch.io  
-- Ko-fi : https://ko-fi.com/palksstudio  
-- Twitter (X) : https://x.com/Palks_Studio
+L’étude, l’analyse et l’inspiration à des fins personnelles
+ou professionnelles sont autorisées.
