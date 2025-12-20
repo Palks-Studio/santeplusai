@@ -482,3 +482,6 @@ est interdite sans autorisation écrite préalable.
 
 L’étude, l’analyse et l’inspiration à des fins personnelles
 ou professionnelles sont autorisées.
+
+© Palks Studio — 2025  
+- https://palks-studio.com
