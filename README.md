@@ -4,7 +4,7 @@
 
 > 🇬🇧 English | [🇫🇷 Français](./README_FR.md)
 
-![License](https://img.shields.io/badge/License-LICENSE_EN.md-lightgreen.svg)
+![License](https://img.shields.io/badge/License-LICENSE.md-lightgreen.svg)
 
 # Project Overview
 
@@ -53,7 +53,7 @@ Each subsystem is logically independent but interacts in a controlled manner wit
 project-root/
 │
 ├── README.md                      → General overview of the project and its architecture
-├── LICENSE                        → Terms of use and legal framework of the project
+├── LICENSE.md                     → Terms of use and legal Framework
 │
 ├── worker/
 │    ├── main.py                   → Worker entry point (cron / PHP trigger)
@@ -378,7 +378,5 @@ requiring minimal maintenance and reducing the attack surface.
 
 ---
 
-## License
-
-© Palks Studio — see LICENSE_EN.md  
+© Palks Studio — see LICENSE.md  
 - https://palks-studio.com
