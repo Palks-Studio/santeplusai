@@ -4,8 +4,6 @@
 
 > 🇬🇧 English | [🇫🇷 Français](./README_FR.md)
 
-![License](https://img.shields.io/badge/License-LICENSE.md-lightgreen.svg)
-
 # Project Overview
 
 This repository presents the complete architecture of a website focused on natural wellness, designed without CMS, SaaS, cookies, or an exposed backend.
@@ -50,10 +48,10 @@ Each subsystem is logically independent but interacts in a controlled manner wit
 ## Project Structure
 
 ```
-project-root/
+autonomous_web_platform/
 │
 ├── README.md                      → General overview of the project and its architecture
-├── LICENCE.md                     → Terms of use and legal Framework
+├── LICENCE.md                     → Terms of use and legal framework
 │
 ├── worker/
 │    ├── main.py                   → Worker entry point (cron / PHP trigger)
@@ -138,7 +136,8 @@ project-root/
 
 This folder contains exclusively the public site.
 
-It is a static website composed of independent HTML files, accompanied by lightweight CSS stylesheets and JavaScript scripts. No critical server-side logic is exposed from this layer.
+It is a static website composed of independent HTML files, accompanied by lightweight CSS stylesheets and JavaScript scripts.  
+No critical server-side logic is exposed from this layer.
 
 The public site is the only point of contact with the browser. It does not store any sensitive data and does not depend on any external services.
 
@@ -223,7 +222,8 @@ The absence of an exposed backend significantly reduces the attack surface and s
 
 The project integrates an internal assistant designed to guide users and answer targeted questions, without exposing complex application logic on the public side.
 
-This assistant relies on an autonomous response engine, implemented in Python and powered by a locally structured JSON database. It analyzes incoming queries, identifies keyword and category matches, and then returns tailored responses.
+This assistant relies on an autonomous response engine, implemented in Python and powered by a locally structured JSON database.  
+It analyzes incoming queries, identifies keyword and category matches, and then returns tailored responses.
 
 ### How It Works
 
@@ -323,7 +323,8 @@ This approach ensures native GDPR compliance, without intrusive banners or conse
 
 The technical choices made in this project were guided by the goal of sustainability rather than the pursuit of complexity or novelty.
 
-The architecture does not rely on any server frameworks, persistent application runtimes, or heavy dependencies. The components used are deliberately simple, stable, and proven.
+The architecture does not rely on any server frameworks, persistent application runtimes, or heavy dependencies.  
+The components used are deliberately simple, stable, and proven.
 
 ### Chosen Principles
 
@@ -355,7 +356,8 @@ The exposed structure aims to document technical choices and system organization
 
 The project integrates communication mechanisms that are intentionally limited and controlled.
 
-Email notifications are used solely to confirm the receipt of messages or to notify of important technical events. User responses are handled manually, by choice, to preserve human interaction.
+Email notifications are used solely to confirm the receipt of messages or to notify of important technical events.  
+User responses are handled manually, by choice, to preserve human interaction.
 
 Additionally, internal scripts ensure automated maintenance:  
 
@@ -367,16 +369,15 @@ Additionally, internal scripts ensure automated maintenance:
 
 ## Conclusion
 
-This project demonstrates the design of a complete, autonomous, and secure website,
+This project demonstrates the design of a complete, autonomous, and secure website,  
 without relying on external platforms and without unnecessary backend exposure.
 
-It shows that a simple, well-thought-out, and controlled architecture
+It shows that a simple, well-thought-out, and controlled architecture  
 can meet real-world needs while remaining sustainable, performant, and compliant.
 
-The system was designed to be reliable in the long term,
+The system was designed to be reliable in the long term,  
 requiring minimal maintenance and reducing the attack surface.
 
 ---
 
-© Palks Studio — see LICENSE.md  
-- https://palks-studio.com
+© Palks Studio — see LICENSE.md
