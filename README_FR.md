@@ -84,10 +84,9 @@ autonomous_web_platform/
 │        └── state.txt             → Fichier de contrôle / état
 │
 ├── web/
-│    ├── endpoint_c.php            → Point d’entrée pour les téléchargements sécurisés
+│    
 │    ├── state.txt                 → Fichier de contrôle d’état du système
 │    ├── .htaccess                 → Règles d’accès et de sécurité
-│    │
 │    └── pdf/
 │        ├── .htaccess             → Règles d’accès internes
 │        ├── dompdf/               → Librairie de génération de PDF
@@ -101,7 +100,6 @@ autonomous_web_platform/
 │        ├── data_c.json           → Registre des tokens de téléchargement
 │        ├── counter.json          → Compteur de numérotation des factures
 │        ├── get_counter.php       → Génération du prochain numéro de facture
-│        ├── update_counter.php    → Mise à jour du compteur de facturation
 │        ├── lib_pdf.php           → Fonctions de génération PDF
 │        ├── lib_html.php          → Fonctions utilitaires HTML
 │        └── lib_counter.php       → Fonctions liées au compteur de factures
@@ -111,6 +109,7 @@ autonomous_web_platform/
      │   └── css/                  → Feuilles de style (externe optionnel)
      │
      ├── images/                   → Images du site (logos et favicons inclus)
+     │   └── site.webmanifest      → Manifest PWA du site
      │
      ├── pages/                    → Pages HTML du site (articles et contenus)
      │   └── *.html
@@ -130,9 +129,9 @@ autonomous_web_platform/
      │
      ├── .htaccess                 → Règles d’accès principales
      │
+     ├── endpoint_c.php            → Point d’entrée pour les téléchargements sécurisés
      ├── robots.txt                → Règles d’indexation pour les moteurs de recherche
      ├── sitemap.xml               → Plan du site pour l’indexation
-     ├── site.webmanifest          → Manifest PWA du site
      ├── endpoint_b.php            → Envoi des avis depuis le formulaire
      ├── data_a.json               → Jetons temporaires liés aux téléchargements
      ├── index_hero.js             → Script d’initialisation du contenu hebdomadaire
