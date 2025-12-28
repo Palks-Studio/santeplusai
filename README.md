@@ -6,11 +6,25 @@
 
 # Project Overview
 
-This repository presents the complete architecture of a website focused on natural wellness, designed without CMS, SaaS, cookies, or an exposed backend.
+This repository presents the complete architecture of a website focused on natural wellness,  
+designed without CMS, SaaS, cookies, or an exposed application backend.
 
-The entire system runs exclusively on shared hosting, without dedicated infrastructure or managed services, except for the payment provider.
+The entire system runs exclusively on shared hosting,  
+without dedicated infrastructure or managed services,  
+except for the payment provider.
 
-The project is based on a deliberately minimalist and autonomous approach: no critical external dependencies, no data collection, and an infrastructure designed to function sustainably on shared hosting.
+The project follows a deliberately minimalist and autonomous approach:  
+no critical external dependencies, no data collection, and an infrastructure  
+designed to operate sustainably on shared hosting.
+
+Due to shared hosting constraints,  
+server entry points may be physically located  
+within the site layer while remaining  
+strictly protected by server-level access rules.
+
+The separation presented in this repository is logical and functional.  
+It does not necessarily reflect the exact physical deployment,  
+which may vary depending on hosting constraints.
 
 ---
 
@@ -25,21 +39,21 @@ The project was designed around clear principles:
 - long-term stability and maintainability  
 - attack surface minimized to the bare minimum
 
-The goal was not to maximize technical complexity, but to build a robust, readable, and predictable system capable of functioning reliably without constant supervision.
+The goal was not to maximize technical complexity, but to build a robust, readable,  
+and predictable system capable of functioning reliably without constant supervision.
 
 ---
 
 ## General Architecture
 
 The project is structured around three distinct subsystems, deliberately separated by role and exposure level.
-
 This organization helps minimize the attack surface, clarify responsibilities, and ensure simple long-term maintenance.
 
 The architecture is based on the following blocks:  
 
-- `site/`: public static layer (HTML, assets, JavaScript)  
-- `web/`: sensitive server-side logic (payment, billing, distribution)  
-- `worker/`: asynchronous internal processing (automation, maintenance)
+- `site/`: public static site, including protected server entry points  
+- `web/`: minimal exposed technical layer (server entry point, access rules)  
+- `worker/`: asynchronous internal processing (bot, automation, maintenance)
 
 Each subsystem is logically independent but interacts in a controlled manner with the others.
 
@@ -50,82 +64,85 @@ Each subsystem is logically independent but interacts in a controlled manner wit
 ```
 autonomous_web_platform/
 │
-├── README.md                      → General overview of the project and its architecture
-├── LICENCE.md                     → Terms of use and legal Framework
+├── README.md                           → General overview of the project and its architecture
+├── LICENCE.md                          → Terms of use and legal Framework
 │
 ├── worker/
-│    ├── main.py                   → Worker entry point (cron / PHP trigger)
-│    ├── core.py                   → Main worker logic
-│    ├── task_a.py                 → Automated response processing
-│    ├── task_b.py                 → Log maintenance task
-│    ├── bridge.php                → PHP → Python bridge
-│    ├── config.json               → Configuration file (anonymized)
-│    ├── state_a.json              → Processed identifiers registry
-│    ├── cron_log.txt              → Cron execution output
+│    ├── main.py                        → Worker entry point (cron / PHP trigger)
+│    ├── core.py                        → Main worker logic
+│    ├── task_a.py                      → Automated response processing
+│    ├── task_b.py                      → Log maintenance task
+│    ├── bridge.php                     → PHP → Python bridge
+│    ├── config.json                    → Configuration file (anonymized)
+│    ├── state_a.json                   → Processed identifiers registry
+│    ├── cron_log.txt                   → Cron execution output
 │    │
 │    ├── data/
-│    │   └── data_a.json           → Worker data source
+│    │   └── data_a.json                → Worker data source
 │    │
 │    ├── logs/
-│    │   └── unmatched.txt         → Unmatched entries log
+│    │   └── unmatched.txt              → Unmatched entries log
 │    │
 │    └── tmp/
-│        └── state.txt             → Runtime control / state file
+│        └── state.txt                  → Runtime control / state file
 │
 ├── web/
-│    ├── state.txt                 → System control / state file
-│    ├── .htaccess                 → Access and security rules
-│    │
-│    └── pdf/
-│        ├── .htaccess             → Internal access rules
-│        ├── dompdf/               → PDF generation library
-│        ├── template_invoice.html → Invoice HTML template
-│        ├── invoices/             → Generated invoices
-│        ├── recettes/             → Revenue data
-│        ├── endpoint_d.php        → Payment initialization
-│        ├── endpoint_e.php        → Payment event handler
-│        ├── success.html          → Page shown after successful payment
-│        ├── cancel.html           → Page shown after canceled payment
-│        ├── data_c.json           → Download token registry
-│        ├── counter.json          → Invoice numbering counter
-│        ├── get_counter.php       → Next invoice number generation
-│        ├── lib_pdf.php           → PDF generation functions
-│        ├── lib_html.php          → HTML utility functions
-│        └── lib_counter.php       → Invoice counter functions
+│    ├── state.txt                      → System control / state file
+│    └── .htaccess                      → Access and security rules
+│
+│
 │
 └── site/
+     │
+     ├── pdf/
+     │    ├── .htaccess                 → Internal access rules
+     │    ├── dompdf/                   → PDF generation library
+     │    ├── template_invoice.html     → Invoice HTML template
+     │    ├── invoices/                 → Generated invoices
+     │    ├── recettes/                 → Revenue data
+     │    ├── endpoint_d.php            → Payment initialization
+     │    ├── endpoint_e.php            → Payment event handler
+     │    ├── success.html              → Page shown after successful payment
+     │    ├── cancel.html               → Page shown after canceled payment
+     │    ├── data_c.json               → Download token registry
+     │    ├── counter.json              → Invoice numbering counter
+     │    ├── get_counter.php           → Next invoice number generation
+     │    ├── lib_pdf.php               → PDF generation functions
+     │    ├── lib_html.php              → HTML utility functions
+     │    └── lib_counter.php           → Invoice counter functions
+     │
      ├── assets/
-     │   └── css/                  → Stylesheets (external optional)
+     │   └── css/                       → Stylesheets (external optional)
      │
-     ├── images/                   → Site images (logos and favicons included)
-     │   └── site.webmanifest      → Site web manifest
+     ├── images/                        → Site images (logos and favicons included)
+     │   └── site.webmanifest           → Site web manifest
      │
-     ├── pages/                    → HTML pages (articles and content)
+     ├── pages/                         → HTML pages (articles and content)
      │   └── *.html
      │
      ├── logs/
-     │   ├── errors.txt            → Error log
-     │   └── interactions.txt      → Interaction log
+     │   ├── errors.txt                 → Error log
+     │   └── interactions.txt           → Interaction log
      │
-     ├── tmp/state.txt             → Control / state file
+     ├── tmp/state.txt                  → Control / state file
      │
-     ├── dl/                       → Store
+     ├── dl/                            → Store
      │
-     ├── index.html                → Home page
-     ├── data_b.json               → Review submission log
-     ├── endpoint_a.php            → Payment webhook
-     ├── task_a.py                 → Log cleanup script
+     ├── index.html                     → Home page
+     ├── data_b.json                    → Review submission log
+     ├── endpoint_a.php                 → Payment webhook
+     ├── task_a.py                      → Log cleanup script
      │
-     ├── .htaccess                 → Main access rules
+     ├── .htaccess                      → Main access rules
      │
-     ├── endpoint_c.php            → Secure download entry point
-     ├── robots.txt                → Search engine indexing rules
-     ├── sitemap.xml               → Sitemap for indexing
-     ├── endpoint_b.php            → Review form submission handler
-     ├── data_a.json               → Temporary download tokens
-     ├── index_hero.js             → Weekly content initialization script
-     ├── weekly-2025               → Weekly data – year 2025
-     └── weekly-2026               → Weekly data – year 2026
+     ├── endpoint_c.php                 → Secure download entry point
+     ├── robots.txt                     → Search engine indexing rules
+     ├── sitemap.xml                    → Sitemap for indexing
+     ├── endpoint_b.php                 → Review form submission handler
+     ├── data_a.json                    → Temporary download tokens
+     ├── index_hero.js                  → Weekly content initialization script
+     ├── weekly-2025                    → Weekly data – year 2025
+     └── weekly-2026                    → Weekly data – year 2026
 ```
 
 
@@ -138,29 +155,36 @@ This folder contains exclusively the public site.
 It is a static website composed of independent HTML files, accompanied by lightweight CSS stylesheets and JavaScript scripts.  
 No critical server-side logic is exposed from this layer.
 
-The public site is the only point of contact with the browser. It does not store any sensitive data and does not depend on any external services.
+The public site is the only point of contact with the browser.  
+It does not store any sensitive data and does not depend on any external services.
+
+Although certain server-side scripts are physically located within this directory,  
+they are never directly accessible and are strictly protected by server-level rules.
 
 ---
 
-### `web/` — Sensitive Server Logic
+### `web/` — Minimal Exposed Technical Layer
 
-This subsystem encompasses all server-side processes related to payments, invoicing, and file distribution.
+This folder corresponds to the exposed server entry point  
+(`public_html` in the production environment).
 
-It includes, notably:  
+It intentionally contains no business logic  
+and is strictly limited to:  
 
-- payment management via an external provider  
-- automatic generation of invoices and receipts  
-- secure file distribution engine  
-- access control and expiration mechanisms
+- server access control rules (`.htaccess`)  
+- technical state or restart files
 
-The entry points are deliberately limited and protected. File and endpoint names have been abstracted to reduce risks associated with public exposure.
+No functional processing, no business data,  
+and no application scripts are present in this layer.
+
+This separation helps reduce the attack surface  
+and strictly isolate the public site from sensitive processing.
 
 ---
 
 ### `worker/` — Internal Automation
 
-The `worker/` folder contains internal processes that run in the background, with no public exposure.
-
+The `worker/` folder contains internal processes that run in the background, with no public exposure.  
 These scripts are triggered solely via scheduled tasks or internal server calls.
 
 They handle, among other things:  
@@ -176,9 +200,10 @@ This choice eliminates the need for an exposed backend and maintains a silent, c
 
 ## 1. Static Public Site
 
-The public site is built on a deliberately simple and lightweight architecture, entirely composed of independent HTML files.
-
-No CMS, no frameworks, no builders, and no CDNs are used. Each page is designed as an autonomous, stable, and reusable unit.
+The public site is built on a deliberately simple and lightweight architecture,  
+entirely composed of independent HTML files.  
+No CMS, no frameworks, no builders, and no CDNs are used.  
+Each page is designed as an autonomous, stable, and reusable unit.
 
 ### Key Features
 
@@ -189,19 +214,22 @@ No CMS, no frameworks, no builders, and no CDNs are used. Each page is designed 
 - Simple and predictable structure  
 - Exportable and reusable files without adaptation
 
-This choice ensures a fast, robust, and easy-to-maintain site, with an extremely reduced risk of failure.
+This choice ensures a fast, robust, and easy-to-maintain site,  
+with an extremely reduced risk of failure.
 
-The site also includes lightweight dynamic display scripts, allowing certain content to evolve periodically without any backend or client-side storage.
+The site also includes lightweight dynamic display scripts,  
+allowing certain content to evolve periodically without any backend or client-side storage.
 
-Stylesheets can be integrated autonomously or optionally externalized, with no critical dependency on external loading.
+Stylesheets can be integrated autonomously or optionally externalized,  
+with no critical dependency on external loading.
 
 ---
 
 ## 2. Internal Automation (Worker)
 
 The project incorporates an internal automation system, without exposing any application backend to the public.
-
-No Python server is accessible from the outside (no web framework, no public APIs, no persistent runtime). All processes are executed exclusively internally.
+No Python server is accessible from the outside (no web framework,  
+no public APIs, no persistent runtime). All processes are executed exclusively internally.
 
 ### How It Works
 
@@ -211,15 +239,16 @@ No Python server is accessible from the outside (no web framework, no public API
 - No unnecessary outgoing communication  
 - No direct network exposure
 
-This choice allows for a silent, controlled, and compliant architecture, while ensuring the project’s automation and maintenance needs are met.
-
+This choice allows for a silent, controlled, and compliant architecture,  
+while ensuring the project’s automation and maintenance needs are met.  
 The absence of an exposed backend significantly reduces the attack surface and simplifies long-term monitoring.
 
 ---
 
 ## 2 bis. Internal Assistant and Response Engine
 
-The project integrates an internal assistant designed to guide users and answer targeted questions, without exposing complex application logic on the public side.
+The project integrates an internal assistant designed to guide users and answer targeted questions,  
+without exposing complex application logic on the public side.
 
 This assistant relies on an autonomous response engine, implemented in Python and powered by a locally structured JSON database.  
 It analyzes incoming queries, identifies keyword and category matches, and then returns tailored responses.
@@ -233,17 +262,19 @@ It analyzes incoming queries, identifies keyword and category matches, and then 
 - Local logging of unrecognized queries  
 - Traceability of technical errors for maintenance purposes
 
-The assistant does not provide medical advice and is strictly limited to informational and guiding content, in line with the project’s scope.
-
-This choice offers contextual assistance while maintaining a sober, predictable architecture that respects security and compliance constraints.
+The assistant does not provide medical advice and is strictly limited to informational and guiding content,  
+in line with the project’s scope.  
+This choice offers contextual assistance while maintaining a sober,  
+predictable architecture that respects security and compliance constraints.
 
 ---
 
 ## 3. Payment, Invoicing, and Distribution
 
-The project integrates a payment and distribution system fully managed server-side, without relying on any external automation intermediaries.
-
-Payments are initiated via a dedicated provider and then processed by internal scripts triggered by events. No sensitive data is stored on the public site.
+The project integrates a payment and distribution system fully managed server-side,  
+without relying on any external automation intermediaries.
+Payments are initiated via a dedicated provider and then processed by internal scripts triggered by events.  
+No sensitive data is stored on the public site.
 
 ### General Pipeline
 
@@ -258,9 +289,10 @@ The entire process is automated and does not depend on any third-party orchestra
 
 ### Secure File Distribution
 
-The distribution of digital files relies on a dedicated internal engine, designed to avoid any direct exposure of resources.
-
-Files are never accessible via public URLs. Access is conditioned on temporary one-time use links, generated dynamically after server-side validation.
+The distribution of digital files relies on a dedicated internal engine,  
+designed to avoid any direct exposure of resources.  
+Files are never accessible via public URLs. Access is conditioned on temporary one-time use links,  
+generated dynamically after server-side validation.
 
 The implemented controls include, notably:  
 
@@ -270,16 +302,15 @@ The implemented controls include, notably:
 - Immediate invalidation after use  
 - Timestamped logging of actual accesses
 
-The system also distinguishes between a simple link consultation and an actual download, with notifications sent to the administration side.
-
+The system also distinguishes between a simple link consultation and an actual download,  
+with notifications sent to the administration side.
 The entire mechanism works without third-party services and without exposing any sensitive logic on the public site.
 
 ---
 
 ## 4. Security and Structural Protection
 
-The project’s security relies primarily on simple and strict structural choices rather than the accumulation of external solutions.
-
+The project’s security relies primarily on simple and strict structural choices rather than the accumulation of external solutions.  
 The architecture has been deliberately designed to minimize the attack surface and reduce exploitable entry points.
 
 ### Implemented Measures
@@ -291,17 +322,16 @@ The architecture has been deliberately designed to minimize the attack surface a
 - Critical zones made inaccessible by default  
 - No direct URLs to private resources
 
-File names, endpoints, and sensitive data have been deliberately abstracted to limit opportunistic attacks and automated scanning.
-
+File names, endpoints, and sensitive data have been deliberately abstracted to limit opportunistic attacks and automated scanning.  
 This approach prioritizes simplicity, readability, and long-term passive security.
 
 ---
 
 ## 5. GDPR Compliance and Data Minimization
 
-The project was designed from the outset with a maximal data minimization approach and regulatory compliance in mind.
-
-No personal data is collected for tracking, analysis, or profiling purposes. The site does not rely on any tracking mechanisms.
+The project was designed from the outset with a maximal data minimization approach and regulatory compliance in mind.  
+No personal data is collected for tracking, analysis, or profiling purposes.  
+The site does not rely on any tracking mechanisms.
 
 ### Applied Principles
 
@@ -312,9 +342,9 @@ No personal data is collected for tracking, analysis, or profiling purposes. The
 - No user accounts  
 - No data collection for marketing purposes
 
-The only data handled by the system is strictly functional, time-limited, and stored locally on the server side.
-
-This approach ensures native GDPR compliance, without intrusive banners or consent management, while respecting the principle of data minimization.
+The only data handled by the system is strictly functional, time-limited, and stored locally on the server side.  
+This approach ensures native GDPR compliance, without intrusive banners or consent management,  
+while respecting the principle of data minimization.
 
 ---
 
@@ -333,20 +363,16 @@ The components used are deliberately simple, stable, and proven.
 - Readable and auditable application logic  
 - Compatibility with standard shared hosting environments
 
-This choice drastically reduces maintenance needs, avoids disruptions from updates, and ensures maximum stability in the long term.
-
+This choice drastically reduces maintenance needs, avoids disruptions from updates, and ensures maximum stability in the long term.  
 The goal is not technical sophistication, but reliability, predictability, and full control over the system.
 
 ---
 
 ## Security Notes and Disclosure
 
-This repository provides an accurate view of the project’s logical architecture while respecting responsible disclosure principles.
-
-Certain file names, endpoints, and structures have been deliberately abstracted or modified to limit any direct exploitation.
-
-No keys, secrets, real data, or sensitive production paths are present in this repository.
-
+This repository provides an accurate view of the project’s logical architecture while respecting responsible disclosure principles.  
+Certain file names, endpoints, and structures have been deliberately abstracted or modified to limit any direct exploitation.  
+No keys, secrets, real data, or sensitive production paths are present in this repository.  
 The exposed structure aims to document technical choices and system organization, without reproducing the exact production environment.
 
 ---
