@@ -113,6 +113,7 @@ autonomous_web_platform/
      │    ├── get_counter.php           → Génération du prochain numéro de facture
      │    ├── lib_pdf.php               → Fonctions de génération PDF
      │    ├── lib_html.php              → Fonctions utilitaires HTML
+     │    ├── lib_mail.php              → Envoi automatique des factures par e-mail
      │    └── lib_counter.php           → Fonctions liées au compteur de factures
      │
      ├── assets/
@@ -140,6 +141,7 @@ autonomous_web_platform/
      ├── .htaccess                      → Règles d’accès principales
      │
      ├── endpoint_c.php                 → Point d’entrée pour les téléchargements sécurisés
+     ├── phpmailer.php                  → Bibliothèque d’envoi e-mail (SMTP)
      ├── robots.txt                     → Règles d’indexation pour les moteurs de recherche
      ├── sitemap.xml                    → Plan du site pour l’indexation
      ├── endpoint_b.php                 → Envoi des avis depuis le formulaire
