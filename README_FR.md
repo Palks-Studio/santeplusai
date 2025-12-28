@@ -7,7 +7,7 @@
 # Présentation du projet
 
 Ce dépôt présente l’architecture complète d’un site web orienté bien-être naturel,  
-conçu sans CMS, sans SaaS, sans cookies et sans backend exposé.
+conçu sans CMS, sans SaaS, sans cookies et sans backend applicatif exposé.
 
 L’ensemble du système fonctionne exclusivement sur un hébergement mutualisé,  
 sans infrastructure dédiée ni services managés,  
@@ -16,6 +16,15 @@ sans infrastructure dédiée ni services managés,
 Le projet repose sur une approche volontairement minimaliste et autonome :  
 aucune dépendance critique externe, aucune collecte de données, et une
 infrastructure pensée pour fonctionner durablement sur un hébergement mutualisé.
+
+Selon les contraintes de l’hébergement mutualisé,  
+les points d’entrée serveur peuvent être physiquement  
+regroupés dans la couche site tout en restant  
+strictement protégés par des règles serveur.
+
+La séparation présentée dans ce dépôt est logique et fonctionnelle.  
+Elle ne reflète pas nécessairement l’implantation physique exacte,  
+qui peut varier selon les contraintes de l’hébergement de production.
 
 ---
 
@@ -47,9 +56,9 @@ sur le long terme.
 
 L’architecture repose sur les blocs suivants :  
 
-- `site/` : couche publique statique (HTML, assets, JavaScript)  
-- `web/` : logique serveur sensible (paiement, facturation, distribution)  
-- `worker/` : traitements internes asynchrones (automatisation, maintenance)
+- `site/` : site public statique, incluant des points d’entrée serveur protégés  
+- `web/` : zone technique exposée minimale (point d’entrée serveur, règles d’accès)  
+- `worker/` : traitements internes asynchrones (bot, automatisation, maintenance)
 
 Chaque sous-système est indépendant sur le plan logique,  
 mais interagit de manière contrôlée avec les autres.
@@ -84,65 +93,66 @@ autonomous_web_platform/
 │        └── state.txt             → Fichier de contrôle / état
 │
 ├── web/
-│    
 │    ├── state.txt                 → Fichier de contrôle d’état du système
-│    ├── .htaccess                 → Règles d’accès et de sécurité
-│    └── pdf/
-│        ├── .htaccess             → Règles d’accès internes
-│        ├── dompdf/               → Librairie de génération de PDF
-│        ├── template_invoice.html → Modèle HTML de facture
-│        ├── invoices/             → Factures générées
-│        ├── recettes/             → Données de recettes
-│        ├── endpoint_d.php        → Initialisation du paiement
-│        ├── endpoint_e.php        → Réception des événements de paiement
-│        ├── success.html          → Page affichée après paiement réussi
-│        ├── cancel.html           → Page affichée après paiement annulé
-│        ├── data_c.json           → Registre des tokens de téléchargement
-│        ├── counter.json          → Compteur de numérotation des factures
-│        ├── get_counter.php       → Génération du prochain numéro de facture
-│        ├── lib_pdf.php           → Fonctions de génération PDF
-│        ├── lib_html.php          → Fonctions utilitaires HTML
-│        └── lib_counter.php       → Fonctions liées au compteur de factures
+│    └── .htaccess                 → Règles d’accès et de sécurité
 │
 └── site/
+     │
+     ├── pdf/
+     │    ├── .htaccess                 → Règles d’accès internes
+     │    ├── dompdf/                   → Librairie de génération de PDF
+     │    ├── template_invoice.html     → Modèle HTML de facture
+     │    ├── invoices/                 → Factures générées
+     │    ├── recettes/                 → Données de recettes
+     │    ├── endpoint_d.php            → Initialisation du paiement
+     │    ├── endpoint_e.php            → Réception des événements de paiement
+     │    ├── success.html              → Page affichée après paiement réussi
+     │    ├── cancel.html               → Page affichée après paiement annulé
+     │    ├── data_c.json               → Registre des tokens de téléchargement
+     │    ├── counter.json              → Compteur de numérotation des factures
+     │    ├── get_counter.php           → Génération du prochain numéro de facture
+     │    ├── lib_pdf.php               → Fonctions de génération PDF
+     │    ├── lib_html.php              → Fonctions utilitaires HTML
+     │    └── lib_counter.php           → Fonctions liées au compteur de factures
+     │
      ├── assets/
-     │   └── css/                  → Feuilles de style (externe optionnel)
+     │    └── css/                      → Feuilles de style (externe optionnel)
      │
-     ├── images/                   → Images du site (logos et favicons inclus)
-     │   └── site.webmanifest      → Manifest PWA du site
+     ├── images/                        → Images du site (logos et favicons inclus)
+     │   └── site.webmanifest           → Manifest PWA du site
      │
-     ├── pages/                    → Pages HTML du site (articles et contenus)
+     ├── pages/                         → Pages HTML du site (articles et contenus)
      │   └── *.html
      │
      ├── logs/
-     │   ├── errors.txt            → Journal des erreurs
-     │   └── interactions.txt      → Journal des interactions
+     │   ├── errors.txt                 → Journal des erreurs
+     │   └── interactions.txt           → Journal des interactions
      │
-     ├── tmp/state.txt             → Fichier de contrôle / état
+     ├── tmp/state.txt                  → Fichier de contrôle / état
      │
-     ├── dl/                       → Store
+     ├── dl/                            → Store
      │
-     ├── index.html                → Page d’accueil
-     ├── data_b.json               → Journal des soumissions d’avis
-     ├── endpoint_a.php            → Webhook de paiement
-     ├── task_a.py                 → Script de nettoyage des logs
+     ├── index.html                     → Page d’accueil
+     ├── data_b.json                    → Journal des soumissions d’avis
+     ├── endpoint_a.php                 → Webhook de paiement
+     ├── task_a.py                      → Script de nettoyage des logs
      │
-     ├── .htaccess                 → Règles d’accès principales
+     ├── .htaccess                      → Règles d’accès principales
      │
-     ├── endpoint_c.php            → Point d’entrée pour les téléchargements sécurisés
-     ├── robots.txt                → Règles d’indexation pour les moteurs de recherche
-     ├── sitemap.xml               → Plan du site pour l’indexation
-     ├── endpoint_b.php            → Envoi des avis depuis le formulaire
-     ├── data_a.json               → Jetons temporaires liés aux téléchargements
-     ├── index_hero.js             → Script d’initialisation du contenu hebdomadaire
-     ├── weekly-2025               → Données hebdomadaires – année 2025
-     └── weekly-2026               → Données hebdomadaires – année 2026
+     ├── endpoint_c.php                 → Point d’entrée pour les téléchargements sécurisés
+     ├── robots.txt                     → Règles d’indexation pour les moteurs de recherche
+     ├── sitemap.xml                    → Plan du site pour l’indexation
+     ├── endpoint_b.php                 → Envoi des avis depuis le formulaire
+     ├── data_a.json                    → Jetons temporaires liés aux téléchargements
+     ├── index_hero.js                  → Script d’initialisation du contenu hebdomadaire
+     ├── weekly-2025                    → Données hebdomadaires – année 2025
+     └── weekly-2026                    → Données hebdomadaires – année 2026
 ```
 
 
 ---
 
-### `site/` — couche publique
+### `site/` — site public statique, incluant des points d’entrée serveur protégés
 
 Ce dossier contient exclusivement le site public.
 
@@ -155,41 +165,43 @@ Il ne stocke aucune donnée sensible et ne dépend d’aucun service externe.
 
 ---
 
-### `web/` — logique serveur sensible
+### `web/` — zone technique exposée minimale
 
-Ce sous-système regroupe l’ensemble des traitements serveur  
-liés aux paiements, à la facturation et à la distribution des fichiers.
+Ce dossier correspond au point d’entrée serveur exposé  
+(`public_html` en environnement de production).
 
-Il contient notamment :  
+Il ne contient volontairement aucune logique métier  
+et se limite strictement à :  
 
-- la gestion des paiements via un prestataire externe  
-- la génération automatique des factures et recettes  
-- le moteur de distribution sécurisée des fichiers  
-- les mécanismes de contrôle et d’expiration des accès
+- règles de contrôle d’accès serveur (`.htaccess`)  
+- fichiers d’état ou de redémarrage technique
 
-Les points d’entrée sont volontairement limités et protégés.  
-Les noms de fichiers et d’endpoints ont été abstraits afin de réduire  
-les risques liés à l’exposition publique.
+Aucun traitement fonctionnel, aucune donnée métier  
+et aucun script applicatif n’y sont présents.
+
+Cette séparation permet de réduire la surface d’attaque  
+et d’isoler strictement le site public et les traitements sensibles.
 
 ---
 
-### `worker/` — automatisation interne
+### `worker/` — traitements internes asynchrones
 
-Le dossier `worker/` contient les traitements internes exécutés  
-en arrière-plan, sans aucune exposition publique.
+Le dossier `worker/` contient exclusivement les traitements internes  
+exécutés en arrière-plan.
 
-Ces scripts sont déclenchés uniquement via des tâches planifiées  
-ou des appels serveur internes.
+Il correspond à la partie bot / assistant / automatisation Python  
+du système et n’est jamais exposé publiquement.
 
-Ils assurent notamment :  
+Les scripts sont déclenchés uniquement via :  
 
-- l’automatisation de certaines opérations  
-- la maintenance des journaux  
-- le nettoyage des fichiers temporaires  
-- la gestion de données internes au format local
+- des tâches planifiées (Cron)  
+- des appels serveur internes contrôlés
 
-Ce choix permet d’éviter tout backend exposé  
-et de conserver une architecture silencieuse et maîtrisée.
+Aucun serveur Python, aucune API publique  
+et aucun runtime persistant ne sont utilisés.
+
+Ce choix permet de conserver une architecture silencieuse,  
+maîtrisée et adaptée à un hébergement mutualisé.
 
 ---
 
@@ -261,6 +273,9 @@ structurée au format JSON.
 Il analyse les requêtes reçues, identifie des correspondances  
 par mots-clés et catégories, puis renvoie des réponses adaptées.
 
+Cet assistant est un composant optionnel, indépendant du pipeline de paiement,  
+et n’est pas requis pour le fonctionnement transactionnel du système.
+
 ### Principes de fonctionnement
 
 - moteur de réponse exécuté côté serveur  
@@ -285,9 +300,8 @@ prévisible et respectueuse des contraintes de sécurité et de conformité.
 Le projet intègre un système de paiement et de distribution  
 entièrement géré côté serveur, sans intermédiaire d’automatisation externe.
 
-Les paiements sont initiés via un prestataire dédié,  
-puis traités par des scripts internes déclenchés par événements.  
-Aucune donnée sensible n’est stockée côté site public.
+Le prestataire de paiement est utilisé exclusivement pour le traitement transactionnel,  
+la logique de facturation et de distribution reste sous contrôle serveur.
 
 ### Pipeline général
 
@@ -427,6 +441,11 @@ La structure exposée vise à documenter les choix techniques
 et l’organisation du système,  
 sans reproduire à l’identique l’environnement de production.
 
+L’architecture présentée reflète fidèlement l’organisation logique du système,  
+indépendamment des ajustements de chemins ou de déploiement imposés par l’hébergeur.
+
+Cette documentation ne constitue pas une description opérationnelle exploitable en production.
+
 ---
 
 ## Communication et maintenance automatisée
@@ -466,4 +485,4 @@ avec un minimum de maintenance et une surface d’attaque réduite.
 
 ---
 
-© Palks Studio — voir LICENCE.md
+© Palks Studio — voir LICENSE.md
