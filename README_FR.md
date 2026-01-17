@@ -26,6 +26,8 @@ La séparation présentée dans ce dépôt est logique et fonctionnelle.
 Elle ne reflète pas nécessairement l’implantation physique exacte,  
 qui peut varier selon les contraintes de l’hébergement de production.
 
+Le site est aujourd’hui exploité en production sur https://santeplusai.fr.
+
 ---
 
 ## Principes et objectifs
@@ -68,7 +70,7 @@ mais interagit de manière contrôlée avec les autres.
 ## Arborescence du projet
 
 ```
-autonomous_web_platform/
+santeplusai/
 │
 ├── README_FR.md                   → Présentation générale du projet et de son architecture
 ├── LICENCE.md                     → Conditions d’utilisation et cadre légal
@@ -101,14 +103,12 @@ autonomous_web_platform/
      ├── pdf/
      │    ├── .htaccess                 → Règles d’accès internes
      │    ├── dompdf/                   → Librairie de génération de PDF
+     │    ├── processed_stripe_ids.json → Anti-doublon Stripe
      │    ├── template_invoice.html     → Modèle HTML de facture
      │    ├── invoices/                 → Factures générées
      │    ├── recettes/                 → Données de recettes
-     │    ├── endpoint_d.php            → Initialisation du paiement
-     │    ├── endpoint_e.php            → Réception des événements de paiement
      │    ├── success.html              → Page affichée après paiement réussi
      │    ├── cancel.html               → Page affichée après paiement annulé
-     │    ├── data_c.json               → Registre des tokens de téléchargement
      │    ├── counter.json              → Compteur de numérotation des factures
      │    ├── get_counter.php           → Génération du prochain numéro de facture
      │    ├── lib_pdf.php               → Fonctions de génération PDF
@@ -120,14 +120,13 @@ autonomous_web_platform/
      │    └── css/                      → Feuilles de style (externe optionnel)
      │
      ├── images/                        → Images du site (logos et favicons inclus)
-     │   └── site.webmanifest           → Manifest PWA du site
+     │    └── site.webmanifest          → Manifest PWA du site
      │
      ├── pages/                         → Pages HTML du site (articles et contenus)
-     │   └── *.html
+     │    └── *.html
      │
      ├── logs/
-     │   ├── errors.txt                 → Journal des erreurs
-     │   └── interactions.txt           → Journal des interactions
+     │    └── .htaccess                 → Règles d’accès internes
      │
      ├── tmp/state.txt                  → Fichier de contrôle / état
      │
@@ -135,16 +134,15 @@ autonomous_web_platform/
      │
      ├── index.html                     → Page d’accueil
      ├── data_b.json                    → Journal des soumissions d’avis
-     ├── endpoint_a.php                 → Webhook de paiement
      ├── task_a.py                      → Script de nettoyage des logs
      │
      ├── .htaccess                      → Règles d’accès principales
-     │
-     ├── endpoint_c.php                 → Point d’entrée pour les téléchargements sécurisés
-     ├── phpmailer.php                  → Bibliothèque d’envoi e-mail (SMTP)
+     ├── endpoint_a.php                 → Webhook de paiement Stripe 
+     ├── endpoint_b.php                 → Gestionnaire d’envoi d’avis
+     ├── endpoint_c.php                 → Point d’entrée de téléchargement
+     ├── endpoint_d.php                 → Initialisation du paiement Stripe
      ├── robots.txt                     → Règles d’indexation pour les moteurs de recherche
      ├── sitemap.xml                    → Plan du site pour l’indexation
-     ├── endpoint_b.php                 → Envoi des avis depuis le formulaire
      ├── data_a.json                    → Jetons temporaires liés aux téléchargements
      ├── index_hero.js                  → Script d’initialisation du contenu hebdomadaire
      ├── weekly-2025                    → Données hebdomadaires – année 2025
@@ -156,7 +154,7 @@ autonomous_web_platform/
 
 ### `site/` — site public statique, incluant des points d’entrée serveur protégés
 
-Ce dossier contient exclusivement le site public.
+Ce dossier contient exclusivement le site public : https://santeplusai.fr
 
 Il s’agit d’un site statique composé de fichiers HTML indépendants,  
 accompagnés de feuilles de style et de scripts JavaScript légers.  
