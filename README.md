@@ -26,6 +26,8 @@ The separation presented in this repository is logical and functional.
 It does not necessarily reflect the exact physical deployment,  
 which may vary depending on hosting constraints.
 
+The website is currently deployed in production at https://santeplusai.fr
+
 ---
 
 ## Principles and Goals
@@ -62,7 +64,7 @@ Each subsystem is logically independent but interacts in a controlled manner wit
 ## Project Structure
 
 ```
-autonomous_web_platform/
+santeplusai/
 │
 ├── README.md                           → General overview of the project and its architecture
 ├── LICENCE.md                          → Terms of use and legal Framework
@@ -90,21 +92,17 @@ autonomous_web_platform/
 │    ├── state.txt                      → System control / state file
 │    └── .htaccess                      → Access and security rules
 │
-│
-│
 └── site/
      │
      ├── pdf/
      │    ├── .htaccess                 → Internal access rules
      │    ├── dompdf/                   → PDF generation library
+     │    ├── processed_stripe_ids.json → Stripe payment deduplication
      │    ├── template_invoice.html     → Invoice HTML template
      │    ├── invoices/                 → Generated invoices
      │    ├── recettes/                 → Revenue data
-     │    ├── endpoint_d.php            → Payment initialization
-     │    ├── endpoint_e.php            → Payment event handler
      │    ├── success.html              → Page shown after successful payment
      │    ├── cancel.html               → Page shown after canceled payment
-     │    ├── data_c.json               → Download token registry
      │    ├── counter.json              → Invoice numbering counter
      │    ├── get_counter.php           → Next invoice number generation
      │    ├── lib_pdf.php               → PDF generation functions
@@ -113,17 +111,17 @@ autonomous_web_platform/
      │    └── lib_counter.php           → Invoice counter functions
      │
      ├── assets/
-     │   └── css/                       → Stylesheets (external optional)
+     │    └── css/                      → Stylesheets (external optional)
      │
      ├── images/                        → Site images (logos and favicons included)
-     │   └── site.webmanifest           → Site web manifest
+     │    └── site.webmanifest          → Site web manifest
      │
      ├── pages/                         → HTML pages (articles and content)
-     │   └── *.html
+     │    └── *.html
      │
      ├── logs/
-     │   ├── errors.txt                 → Error log
-     │   └── interactions.txt           → Interaction log
+     │    ├── .htaccess                 → Internal access rules
+     │    └──  errors.txt               → Error log
      │
      ├── tmp/state.txt                  → Control / state file
      │
@@ -131,16 +129,15 @@ autonomous_web_platform/
      │
      ├── index.html                     → Home page
      ├── data_b.json                    → Review submission log
-     ├── endpoint_a.php                 → Payment webhook
      ├── task_a.py                      → Log cleanup script
      │
      ├── .htaccess                      → Main access rules
-     │
-     ├── endpoint_c.php                 → Secure download entry point
-     ├── phpmailer.php                  → Email delivery library (SMTP)
+     ├── endpoint_a.php                 → Stripe payment webhook
+     ├── endpoint_b.php                 → Review submission handler
+     ├── endpoint_c.php                 → Secure download endpoint 
+     ├── endpoint_d.php                 → Stripe checkout initializer
      ├── robots.txt                     → Search engine indexing rules
      ├── sitemap.xml                    → Sitemap for indexing
-     ├── endpoint_b.php                 → Review form submission handler
      ├── data_a.json                    → Temporary download tokens
      ├── index_hero.js                  → Weekly content initialization script
      ├── weekly-2025                    → Weekly data – year 2025
@@ -152,7 +149,7 @@ autonomous_web_platform/
 
 ### `site/` — Public Layer
 
-This folder contains exclusively the public site.
+This folder contains exclusively the public site: https://santeplusai.fr
 
 It is a static website composed of independent HTML files, accompanied by lightweight CSS stylesheets and JavaScript scripts.  
 No critical server-side logic is exposed from this layer.
