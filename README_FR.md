@@ -26,8 +26,6 @@ La séparation présentée dans ce dépôt est logique et fonctionnelle.
 Elle ne reflète pas nécessairement l’implantation physique exacte,  
 qui peut varier selon les contraintes de l’hébergement de production.
 
-Le site est aujourd’hui exploité en production sur https://santeplusai.fr.
-
 ---
 
 ## Principes et objectifs
@@ -154,7 +152,7 @@ santeplusai/
 
 ### `site/` — site public statique, incluant des points d’entrée serveur protégés
 
-Ce dossier contient exclusivement le site public : https://santeplusai.fr
+Ce dossier contient exclusivement le site public.
 
 Il s’agit d’un site statique composé de fichiers HTML indépendants,  
 accompagnés de feuilles de style et de scripts JavaScript légers.  
