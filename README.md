@@ -26,8 +26,6 @@ The separation presented in this repository is logical and functional.
 It does not necessarily reflect the exact physical deployment,  
 which may vary depending on hosting constraints.
 
-The website is currently deployed in production at https://santeplusai.fr
-
 ---
 
 ## Principles and Goals
@@ -67,7 +65,7 @@ Each subsystem is logically independent but interacts in a controlled manner wit
 santeplusai/
 │
 ├── README.md                           → General overview of the project and its architecture
-├── LICENCE.md                          → Terms of use and legal Framework
+├── LICENSE.md                          → Terms of use and legal Framework
 │
 ├── worker/
 │    ├── main.py                        → Worker entry point (cron / PHP trigger)
@@ -149,7 +147,7 @@ santeplusai/
 
 ### `site/` — Public Layer
 
-This folder contains exclusively the public site: https://santeplusai.fr
+This folder contains exclusively the public site.
 
 It is a static website composed of independent HTML files, accompanied by lightweight CSS stylesheets and JavaScript scripts.  
 No critical server-side logic is exposed from this layer.
