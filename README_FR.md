@@ -70,31 +70,31 @@ mais interagit de manière contrôlée avec les autres.
 ```
 santeplusai/
 │
-├── README_FR.md                   → Présentation générale du projet et de son architecture
-├── LICENCE.md                     → Conditions d’utilisation et cadre légal
+├── README_FR.md                        → Présentation générale du projet et de son architecture
+├── LICENCE.md                          → Conditions d’utilisation et cadre légal
 │
 ├── worker/
-│    ├── main.py                   → Point d’entrée du worker (cron / déclencheur PHP)
-│    ├── core.py                   → Logique principale du worker
-│    ├── task_a.py                 → Traitement automatisé
-│    ├── task_b.py                 → Maintenance des journaux
-│    ├── bridge.php                → Pont PHP → Python
-│    ├── config.json               → Fichier de configuration (anonymisé)
-│    ├── state_a.json              → Registre des identifiants traités
-│    ├── cron_log.txt              → Sortie des exécutions cron
+│    ├── main.py                        → Point d’entrée du worker (cron / déclencheur PHP)
+│    ├── core.py                        → Logique principale du worker
+│    ├── task_a.py                      → Traitement automatisé
+│    ├── task_b.py                      → Maintenance des journaux
+│    ├── bridge.php                     → Pont PHP → Python
+│    ├── config.json                    → Fichier de configuration (anonymisé)
+│    ├── state_a.json                   → Registre des identifiants traités
+│    ├── cron_log.txt                   → Sortie des exécutions cron
 │    │
 │    ├── data/
-│    │   └── data_a.json           → Source de données du worker
+│    │   └── data_a.json                → Source de données du worker
 │    │
 │    ├── logs/
-│    │   └── unmatched.txt         → Journal des entrées non reconnues
+│    │   └── unmatched.txt              → Journal des entrées non reconnues
 │    │
 │    └── tmp/
-│        └── state.txt             → Fichier de contrôle / état
+│        └── state.txt                  → Fichier de contrôle / état
 │
 ├── web/
-│    ├── state.txt                 → Fichier de contrôle d’état du système
-│    └── .htaccess                 → Règles d’accès et de sécurité
+│    ├── state.txt                      → Fichier de contrôle d’état du système
+│    └── .htaccess                      → Règles d’accès et de sécurité
 │
 └── site/
      │
