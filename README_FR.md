@@ -26,6 +26,8 @@ La séparation présentée dans ce dépôt est logique et fonctionnelle.
 Elle ne reflète pas nécessairement l’implantation physique exacte,  
 qui peut varier selon les contraintes de l’hébergement de production.
 
+Le site est aujourd’hui exploité en production sur https://santeplusai.fr.
+
 ---
 
 ## Principes et objectifs
@@ -69,32 +71,35 @@ mais interagit de manière contrôlée avec les autres.
 
 ```
 santeplusai/
+├── docs/
+│    ├── README_FR.md              → General overview of the project and its architecture
+│    ├── OPERATIONS.md             → Guide d’exploitation et de fonctionnement
+│    └── SYSTEM_OVERVIEW_FR.md     → Vue d’ensemble du système
 │
-├── README_FR.md                        → Présentation générale du projet et de son architecture
-├── LICENCE.md                          → Conditions d’utilisation et cadre légal
+├── LICENCE.md                     → Conditions d’utilisation et cadre légal
 │
 ├── worker/
-│    ├── main.py                        → Point d’entrée du worker (cron / déclencheur PHP)
-│    ├── core.py                        → Logique principale du worker
-│    ├── task_a.py                      → Traitement automatisé
-│    ├── task_b.py                      → Maintenance des journaux
-│    ├── bridge.php                     → Pont PHP → Python
-│    ├── config.json                    → Fichier de configuration (anonymisé)
-│    ├── state_a.json                   → Registre des identifiants traités
-│    ├── cron_log.txt                   → Sortie des exécutions cron
+│    ├── main.py                   → Point d’entrée du worker (cron / déclencheur PHP)
+│    ├── core.py                   → Logique principale du worker
+│    ├── task_a.py                 → Traitement automatisé
+│    ├── task_b.py                 → Maintenance des journaux
+│    ├── bridge.php                → Pont PHP → Python
+│    ├── config.json               → Fichier de configuration (anonymisé)
+│    ├── state_a.json              → Registre des identifiants traités
+│    ├── cron_log.txt              → Sortie des exécutions cron
 │    │
 │    ├── data/
-│    │   └── data_a.json                → Source de données du worker
+│    │   └── data_a.json           → Source de données du worker
 │    │
 │    ├── logs/
-│    │   └── unmatched.txt              → Journal des entrées non reconnues
+│    │   └── unmatched.txt         → Journal des entrées non reconnues
 │    │
 │    └── tmp/
-│        └── state.txt                  → Fichier de contrôle / état
+│        └── state.txt             → Fichier de contrôle / état
 │
 ├── web/
-│    ├── state.txt                      → Fichier de contrôle d’état du système
-│    └── .htaccess                      → Règles d’accès et de sécurité
+│    ├── state.txt                 → Fichier de contrôle d’état du système
+│    └── .htaccess                 → Règles d’accès et de sécurité
 │
 └── site/
      │
@@ -152,7 +157,7 @@ santeplusai/
 
 ### `site/` — site public statique, incluant des points d’entrée serveur protégés
 
-Ce dossier contient exclusivement le site public.
+Ce dossier contient exclusivement le site public : https://santeplusai.fr
 
 Il s’agit d’un site statique composé de fichiers HTML indépendants,  
 accompagnés de feuilles de style et de scripts JavaScript légers.  
@@ -483,4 +488,5 @@ avec un minimum de maintenance et une surface d’attaque réduite.
 
 ---
 
-© Palks Studio — voir LICENSE.md
+© Palks Studio — voir LICENSE.md  
+- https://palks-studio.com
