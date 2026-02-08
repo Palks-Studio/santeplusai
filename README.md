@@ -8,6 +8,13 @@
 
 ![License](https://img.shields.io/badge/License-LICENSE.md-lightgreen.svg)
 
+<a href="https://santeplusai.fr">
+  <img src="https://img.shields.io/badge/SantéPlusAI-Website-0a5645?style=for-the-badge&logoColor=white" />
+</a>
+
+> This repository is a technical presentation and documentation repository.  
+> It does not contain downloadable source code or production files.
+
 # Project Overview
 
 This repository presents the complete architecture of a website focused on natural wellness,  
