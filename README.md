@@ -8,9 +8,11 @@
 
 ![License](https://img.shields.io/badge/License-LICENSE.md-lightgreen.svg)
 
-<a href="https://santeplusai.fr">
-  <img src="https://img.shields.io/badge/SantéPlusAI-Website-0a5645?style=for-the-badge&logoColor=white" />
-</a>
+<p align="center">
+  <a href="https://santeplusai.fr">
+    <img src="https://img.shields.io/badge/SantéPlusAI-Website-0a5645?style=for-the-badge&logoColor=white" />
+  </a>
+</p>
 
 > This repository is a technical presentation and documentation repository.  
 > It does not contain downloadable source code or production files.
