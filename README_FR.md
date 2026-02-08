@@ -7,6 +7,9 @@
 > 🇫🇷 Français | [🇬🇧 English](./README.md)
 
 ![License](https://img.shields.io/badge/License-LICENSE.md-lightgreen.svg)
+![Static Site](https://img.shields.io/badge/Type-Static%20Site-0a5645?style=flat)
+![Architecture](https://img.shields.io/badge/Architecture-Showcase-151b1c?style=flat)
+![Stack](https://img.shields.io/badge/Stack-HTML%2FCSS%2FJS-0095b1?style=flat)
 
 <p align="center">
   <a href="https://santeplusai.fr">
