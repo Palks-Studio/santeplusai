@@ -1,5 +1,7 @@
 <p align="center">
-  <img src="docs/images/Palks_Studio.png" alt="Palks Studio" width="600">
+  <img src="docs/images/santeplusai.png"
+       alt="SantéPlusAI homepage — natural wellness program interface and structured weekly guidance"
+       width="600">
 </p>
 
 > 🇬🇧 English | [🇫🇷 Français](./README_FR.md)
