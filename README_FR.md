@@ -8,7 +8,16 @@
 
 ![License](https://img.shields.io/badge/License-LICENSE.md-lightgreen.svg)
 
+<p align="center">
+  <a href="https://santeplusai.fr">
+    <img src="https://img.shields.io/badge/SantéPlusAI-Website-0a5645?style=for-the-badge&logoColor=white" />
+  </a>
+</p>
+
 # Présentation du projet
+
+> Ce dépôt constitue une présentation technique et une documentation du projet.  
+> Il ne contient pas de code source téléchargeable ni de fichiers de production.
 
 Ce dépôt présente l’architecture complète d’un site web orienté bien-être naturel,  
 conçu sans CMS, sans SaaS, sans cookies et sans backend applicatif exposé.
