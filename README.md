@@ -14,10 +14,10 @@
   </a>
 </p>
 
+# Project Overview
+
 > This repository is a technical presentation and documentation repository.  
 > It does not contain downloadable source code or production files.
-
-# Project Overview
 
 This repository presents the complete architecture of a website focused on natural wellness,  
 designed without CMS, SaaS, cookies, or an exposed application backend.
