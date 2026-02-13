@@ -1,7 +1,7 @@
 <p align="center">
   <img src="docs/images/santeplusai.png"
        alt="SantéPlusAI homepage — natural wellness program interface and structured weekly guidance"
-       width="600">
+       width="1200">
 </p>
 
 > 🇫🇷 Français | [🇬🇧 English](./README.md)
