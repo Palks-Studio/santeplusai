@@ -90,7 +90,8 @@ santeplusai/
 ├── web/                                → Fichier de contrôle d’état du système
 │
 ├── docs/
-│    ├── README_FR.md                   → General overview of the project and its architecture
+│    ├── README_FR.md                   → Vue d’ensemble du projet et de son architecture
+│    ├── README.md                      → General overview of the project and its architecture
 │    ├── OPERATIONS.md                  → Guide d’exploitation et de fonctionnement
 │    └── SYSTEM_OVERVIEW_FR.md          → Vue d’ensemble du système
 │
@@ -110,10 +111,10 @@ santeplusai/
 └── site/
      ├── pdf/
      │    ├── dompdf/                   → Librairie de génération de PDF
-     │    ├── processed_stripe_ids.json → Anti-doublon Stripe
-     │    ├── template_invoice.html     → Modèle HTML de facture
      │    ├── invoices/                 → Factures générées
      │    ├── recettes/                 → Données de recettes
+     │    ├── processed_stripe_ids.json → Anti-doublon Stripe
+     │    ├── template_invoice.html     → Modèle HTML de facture
      │    ├── success.html              → Page affichée après paiement réussi
      │    ├── cancel.html               → Page affichée après paiement annulé
      │    ├── counter.json              → Compteur de numérotation des factures
@@ -125,7 +126,7 @@ santeplusai/
      │
      ├── assets/                        → Feuilles de style (externe optionnel)
      ├── pages/                         → Pages HTML du site (articles et contenus)
-     ├── logs/
+     ├── logs/                          → Journaux d'erreurs
      ├── images/                        → Images du site (logos et favicons inclus)
      ├── tmp/                           → Fichier de contrôle / état
      ├── dl/                            → Store
