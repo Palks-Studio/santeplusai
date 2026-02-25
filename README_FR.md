@@ -87,12 +87,12 @@ mais interagit de manière contrôlée avec les autres.
 
 ```
 santeplusai/
+├── web/                                → Fichier de contrôle d’état du système
+│
 ├── docs/
 │    ├── README_FR.md                   → General overview of the project and its architecture
 │    ├── OPERATIONS.md                  → Guide d’exploitation et de fonctionnement
 │    └── SYSTEM_OVERVIEW_FR.md          → Vue d’ensemble du système
-│
-├── LICENCE.md                          → Conditions d’utilisation et cadre légal
 │
 ├── worker/
 │    ├── main.py                        → Point d’entrée du worker (cron / déclencheur PHP)
@@ -103,24 +103,12 @@ santeplusai/
 │    ├── config.json                    → Fichier de configuration (anonymisé)
 │    ├── state_a.json                   → Registre des identifiants traités
 │    ├── cron_log.txt                   → Sortie des exécutions cron
-│    │
-│    ├── data/
-│    │   └── data_a.json                → Source de données du worker
-│    │
-│    ├── logs/
-│    │   └── unmatched.txt              → Journal des entrées non reconnues
-│    │
-│    └── tmp/
-│        └── state.txt                  → Fichier de contrôle / état
-│
-├── web/
-│    ├── state.txt                      → Fichier de contrôle d’état du système
-│    └── .htaccess                      → Règles d’accès et de sécurité
+│    ├── data/                          → Source de données du worker
+│    ├── logs/                          → Journal des entrées non reconnues
+│    └── tmp/                           → Fichier de contrôle / état
 │
 └── site/
-     │
      ├── pdf/
-     │    ├── .htaccess                 → Règles d’accès internes
      │    ├── dompdf/                   → Librairie de génération de PDF
      │    ├── processed_stripe_ids.json → Anti-doublon Stripe
      │    ├── template_invoice.html     → Modèle HTML de facture
@@ -135,27 +123,19 @@ santeplusai/
      │    ├── lib_mail.php              → Envoi automatique des factures par e-mail
      │    └── lib_counter.php           → Fonctions liées au compteur de factures
      │
-     ├── assets/
-     │    └── css/                      → Feuilles de style (externe optionnel)
-     │
-     ├── images/                        → Images du site (logos et favicons inclus)
-     │    └── site.webmanifest          → Manifest PWA du site
-     │
+     ├── assets/                        → Feuilles de style (externe optionnel)
      ├── pages/                         → Pages HTML du site (articles et contenus)
-     │    └── *.html
-     │
      ├── logs/
-     │    └── .htaccess                 → Règles d’accès internes
-     │
-     ├── tmp/state.txt                  → Fichier de contrôle / état
-     │
+     ├── images/                        → Images du site (logos et favicons inclus)
+     ├── tmp/                           → Fichier de contrôle / état
      ├── dl/                            → Store
      │
+     ├── LICENCE.md                     → Conditions d’utilisation et cadre légal
+     │
+     ├── site.webmanifest               → Manifest PWA du site
      ├── index.html                     → Page d’accueil
      ├── data_b.json                    → Journal des soumissions d’avis
      ├── task_a.py                      → Script de nettoyage des logs
-     │
-     ├── .htaccess                      → Règles d’accès principales
      ├── endpoint_a.php                 → Webhook de paiement Stripe 
      ├── endpoint_b.php                 → Gestionnaire d’envoi d’avis
      ├── endpoint_c.php                 → Point d’entrée de téléchargement
