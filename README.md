@@ -81,86 +81,65 @@ Each subsystem is logically independent but interacts in a controlled manner wit
 
 ```
 santeplusai/
+├── web/                                → Fichier de contrôle d’état du système
+│
 ├── docs/
-│    ├── README.md                      → General overview of the project and its architecture
-│    ├── OPERATIONS.md                  → Operations and usage guide
-│    └── SYSTEM_OVERVIEW_FR.md          → System overview
-│ 
-├── LICENSE.md                          → Terms of use and legal Framework
+│    ├── README_FR.md                   → General overview of the project and its architecture
+│    ├── OPERATIONS.md                  → Guide d’exploitation et de fonctionnement
+│    └── SYSTEM_OVERVIEW_FR.md          → Vue d’ensemble du système
 │
 ├── worker/
-│    ├── main.py                        → Worker entry point (cron / PHP trigger)
-│    ├── core.py                        → Main worker logic
-│    ├── task_a.py                      → Automated response processing
-│    ├── task_b.py                      → Log maintenance task
-│    ├── bridge.php                     → PHP → Python bridge
-│    ├── config.json                    → Configuration file (anonymized)
-│    ├── state_a.json                   → Processed identifiers registry
-│    ├── cron_log.txt                   → Cron execution output
-│    │
-│    ├── data/
-│    │   └── data_a.json                → Worker data source
-│    │
-│    ├── logs/
-│    │   └── unmatched.txt              → Unmatched entries log
-│    │
-│    └── tmp/
-│        └── state.txt                  → Runtime control / state file
-│
-├── web/
-│    ├── state.txt                      → System control / state file
-│    └── .htaccess                      → Access and security rules
+│    ├── main.py                        → Point d’entrée du worker (cron / déclencheur PHP)
+│    ├── core.py                        → Logique principale du worker
+│    ├── task_a.py                      → Traitement automatisé
+│    ├── task_b.py                      → Maintenance des journaux
+│    ├── bridge.php                     → Pont PHP → Python
+│    ├── config.json                    → Fichier de configuration (anonymisé)
+│    ├── state_a.json                   → Registre des identifiants traités
+│    ├── cron_log.txt                   → Sortie des exécutions cron
+│    ├── data/                          → Source de données du worker
+│    ├── logs/                          → Journal des entrées non reconnues
+│    └── tmp/                           → Fichier de contrôle / état
 │
 └── site/
-     │
      ├── pdf/
-     │    ├── .htaccess                 → Internal access rules
-     │    ├── dompdf/                   → PDF generation library
-     │    ├── processed_stripe_ids.json → Stripe payment deduplication
-     │    ├── template_invoice.html     → Invoice HTML template
-     │    ├── invoices/                 → Generated invoices
-     │    ├── recettes/                 → Revenue data
-     │    ├── success.html              → Page shown after successful payment
-     │    ├── cancel.html               → Page shown after canceled payment
-     │    ├── counter.json              → Invoice numbering counter
-     │    ├── get_counter.php           → Next invoice number generation
-     │    ├── lib_pdf.php               → PDF generation functions
-     │    ├── lib_html.php              → HTML utility functions
-     │    ├── lib_mail.php              → Automated invoice email delivery
-     │    └── lib_counter.php           → Invoice counter functions
+     │    ├── dompdf/                   → Librairie de génération de PDF
+     │    ├── processed_stripe_ids.json → Anti-doublon Stripe
+     │    ├── template_invoice.html     → Modèle HTML de facture
+     │    ├── invoices/                 → Factures générées
+     │    ├── recettes/                 → Données de recettes
+     │    ├── success.html              → Page affichée après paiement réussi
+     │    ├── cancel.html               → Page affichée après paiement annulé
+     │    ├── counter.json              → Compteur de numérotation des factures
+     │    ├── get_counter.php           → Génération du prochain numéro de facture
+     │    ├── lib_pdf.php               → Fonctions de génération PDF
+     │    ├── lib_html.php              → Fonctions utilitaires HTML
+     │    ├── lib_mail.php              → Envoi automatique des factures par e-mail
+     │    └── lib_counter.php           → Fonctions liées au compteur de factures
      │
-     ├── assets/
-     │    └── css/                      → Stylesheets (external optional)
-     │
-     ├── images/                        → Site images (logos and favicons included)
-     │    └── site.webmanifest          → Site web manifest
-     │
-     ├── pages/                         → HTML pages (articles and content)
-     │    └── *.html
-     │
+     ├── assets/                        → Feuilles de style (externe optionnel)
+     ├── pages/                         → Pages HTML du site (articles et contenus)
      ├── logs/
-     │    ├── .htaccess                 → Internal access rules
-     │    └──  errors.txt               → Error log
-     │
-     ├── tmp/state.txt                  → Control / state file
-     │
+     ├── images/                        → Images du site (logos et favicons inclus)
+     ├── tmp/                           → Fichier de contrôle / état
      ├── dl/                            → Store
      │
-     ├── index.html                     → Home page
-     ├── data_b.json                    → Review submission log
-     ├── task_a.py                      → Log cleanup script
+     ├── LICENCE.md                     → Conditions d’utilisation et cadre légal
      │
-     ├── .htaccess                      → Main access rules
-     ├── endpoint_a.php                 → Stripe payment webhook
-     ├── endpoint_b.php                 → Review submission handler
-     ├── endpoint_c.php                 → Secure download endpoint 
-     ├── endpoint_d.php                 → Stripe checkout initializer
-     ├── robots.txt                     → Search engine indexing rules
-     ├── sitemap.xml                    → Sitemap for indexing
-     ├── data_a.json                    → Temporary download tokens
-     ├── index_hero.js                  → Weekly content initialization script
-     ├── weekly-2025                    → Weekly data – year 2025
-     └── weekly-2026                    → Weekly data – year 2026
+     ├── site.webmanifest               → Manifest PWA du site
+     ├── index.html                     → Page d’accueil
+     ├── data_b.json                    → Journal des soumissions d’avis
+     ├── task_a.py                      → Script de nettoyage des logs
+     ├── endpoint_a.php                 → Webhook de paiement Stripe 
+     ├── endpoint_b.php                 → Gestionnaire d’envoi d’avis
+     ├── endpoint_c.php                 → Point d’entrée de téléchargement
+     ├── endpoint_d.php                 → Initialisation du paiement Stripe
+     ├── robots.txt                     → Règles d’indexation pour les moteurs de recherche
+     ├── sitemap.xml                    → Plan du site pour l’indexation
+     ├── data_a.json                    → Jetons temporaires liés aux téléchargements
+     ├── index_hero.js                  → Script d’initialisation du contenu hebdomadaire
+     ├── weekly-2025                    → Données hebdomadaires – année 2025
+     └── weekly-2026                    → Données hebdomadaires – année 2026
 ```
 
 
