@@ -126,7 +126,7 @@ santeplusai/
      ├── tmp/                           → Control / state file
      ├── dl/                            → Store
      │
-     ├── LICENSE.md                          → Terms of use and legal Framework
+     ├── LICENSE.md                     → Terms of use and legal Framework
      │
      ├── site.webmanifest               → Site web manifest
      ├── index.html                     → Home page
