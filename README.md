@@ -42,9 +42,7 @@ The separation presented in this repository is logical and functional.
 It does not necessarily reflect the exact physical deployment,  
 which may vary depending on hosting constraints.
 
-The website is currently deployed in production at <a href="https://santeplusai.fr">
-    <img src="https://img.shields.io/badge/SantéPlusAI-Website-0a5645?style=for-the-badge&logoColor=white" />
-  </a>
+The website is currently deployed in production at https://santeplusai.fr
 
 ---
 
