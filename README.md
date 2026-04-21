@@ -81,67 +81,67 @@ Each subsystem is logically independent but interacts in a controlled manner wit
 
 ```
 santeplusai/
-├── web/                                → System control / state file
+├── web/                         → System control / state file
 │
 ├── docs/
-│    ├── README_FR.md                   → Vue d’ensemble du projet et de son architecture
-│    ├── README.md                      → General overview of the project and its architecture
-│    ├── OPERATIONS.md                  → Operations and usage guide
-│    └── SYSTEM_OVERVIEW_FR.md          → System overview
+│    ├── README_FR.md            → Vue d’ensemble du projet et de son architecture
+│    ├── README.md               → General overview of the project and its architecture
+│    ├── OPERATIONS.md           → Operations and usage guide
+│    └── SYSTEM_OVERVIEW_FR.md   → System overview
 │
 ├── worker/
-│    ├── main.py                        → Worker entry point (cron / PHP trigger)
-│    ├── core.py                        → Main worker logic
-│    ├── task_a.py                      → Automated response processing
-│    ├── task_b.py                      → Log maintenance task
-│    ├── bridge.php                     → PHP → Python bridge
-│    ├── config.json                    → Configuration file (anonymized)
-│    ├── state_a.json                   → Processed identifiers registry
-│    ├── cron_log.txt                   → Cron execution output
-│    ├── data/                          → Worker data source
-│    ├── logs/                          → Unmatched entries log
-│    └── tmp/                           → Runtime control / state file
+│    ├── runner.py               → Worker entry point (cron / PHP trigger)
+│    ├── core.py                 → Main worker logic
+│    ├── task_a.py               → Automated response processing
+│    ├── task_b.py               → Log maintenance task
+│    ├── bridge.php              → PHP → Python bridge
+│    ├── settings.json           → Configuration file (anonymized)
+│    ├── state_a.json            → Processed identifiers registry
+│    ├── execution.log           → Cron execution output
+│    ├── data/                   → Worker data source
+│    ├── logs/                   → Unmatched entries log
+│    └── tmp/                    → Runtime control / state file
 │
 └── site/
      │
      ├── pdf/
-     │    ├── dompdf/                   → PDF generation library
-     │    ├── invoices/                 → Generated invoices
-     │    ├── recettes/                 → Revenue data
-     │    ├── processed_stripe_ids.json → Stripe payment deduplication
-     │    ├── template_invoice.html     → Invoice HTML template
-     │    ├── success.html              → Page shown after successful payment
-     │    ├── cancel.html               → Page shown after canceled payment
-     │    ├── counter.json              → Invoice numbering counter
-     │    ├── get_counter.php           → Next invoice number generation
-     │    ├── lib_pdf.php               → PDF generation functions
-     │    ├── lib_html.php              → HTML utility functions
-     │    ├── lib_mail.php              → Automated invoice email delivery
-     │    └── lib_counter.php           → Invoice counter functions
+     │    ├── engine/            → Document generation engine
+     │    ├── documents/         → Generated documents
+     │    ├── data/              → Associated data
+     │    ├── processed_ids.json → Deduplication registry
+     │    ├── template.html      → Document template
+     │    ├── success.html       → Confirmation page
+     │    ├── cancel.html        → Cancellation page
+     │    ├── sequence.json      → Identifier management
+     │    ├── next_id.php        → Next identifier generation
+     │    ├── core_pdf.php       → Internal PDF functions
+     │    ├── core_html.php      → Internal HTML functions
+     │    ├── core_mail.php      → Internal email functions
+     │    └── core_sequence.php  → Internal numbering functions
      │
-     ├── assets/                        → Stylesheets (external optional)
-     ├── images/                        → Site images (logos and favicons included)
-     ├── pages/                         → HTML pages (articles and content)
-     ├── logs/                          → Error log
-     ├── tmp/                           → Control / state file
-     ├── dl/                            → Store
+     ├── assets/                 → Stylesheets (external optional)
+     ├── images/                 → Site images (logos and favicons included)
+     ├── pages/                  → HTML pages (articles and content)
+     ├── logs/                   → Error log
+     ├── tmp/                    → Control / state file
+     ├── dl/                     → Store
      │
-     ├── LICENSE.md                     → Terms of use and legal Framework
+     ├── LICENSE.md              → Terms of use and legal Framework
      │
-     ├── site.webmanifest               → Site web manifest
-     ├── index.html                     → Home page
-     ├── data_b.json                    → Review submission log
-     ├── task_a.py                      → Log cleanup script
-     ├── endpoint_a.php                 → Stripe payment webhook
-     ├── endpoint_b.php                 → Review submission handler
-     ├── endpoint_c.php                 → Secure download endpoint 
-     ├── endpoint_d.php                 → Stripe checkout initializer
-     ├── robots.txt                     → Search engine indexing rules
-     ├── sitemap.xml                    → Sitemap for indexing
-     ├── data_a.json                    → Temporary download tokens
-     ├── index_hero.js                  → Weekly content initialization script
-     ├── weekly-2025                    → Weekly data – year 2025
-     └── weekly-2026                    → Weekly data – year 2026
+     ├── site.webmanifest        → Site web manifest
+     ├── index.html              → Home page
+     ├── data_b.json             → Review submission log
+     ├── task_a.py               → Log cleanup script
+     ├── endpoint_a.php          → Stripe payment webhook
+     ├── endpoint_b.php          → Review submission handler
+     ├── endpoint_c.php          → Secure download endpoint 
+     ├── endpoint_d.php          → Stripe checkout initializer
+     ├── robots.txt              → Search engine indexing rules
+     ├── sitemap.xml             → Sitemap for indexing
+     ├── data_a.json             → Temporary download tokens
+     ├── index_hero.js           → Weekly content initialization script
+     ├── weekly-2025             → Weekly data – year 2025
+     └── weekly-2026             → Weekly data – year 2026
 ```
 
 
