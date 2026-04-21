@@ -87,66 +87,66 @@ mais interagit de manière contrôlée avec les autres.
 
 ```
 santeplusai/
-├── web/                                → Fichier de contrôle d’état du système
+├── web/                         → Fichier de contrôle d’état du système
 │
 ├── docs/
-│    ├── README_FR.md                   → Vue d’ensemble du projet et de son architecture
-│    ├── README.md                      → General overview of the project and its architecture
-│    ├── OPERATIONS.md                  → Guide d’exploitation et de fonctionnement
-│    └── SYSTEM_OVERVIEW_FR.md          → Vue d’ensemble du système
+│    ├── README_FR.md            → Vue d’ensemble du projet et de son architecture
+│    ├── README.md               → General overview of the project and its architecture
+│    ├── OPERATIONS.md           → Guide d’exploitation et de fonctionnement
+│    └── SYSTEM_OVERVIEW_FR.md   → Vue d’ensemble du système
 │
 ├── worker/
-│    ├── main.py                        → Point d’entrée du worker (cron / déclencheur PHP)
-│    ├── core.py                        → Logique principale du worker
-│    ├── task_a.py                      → Traitement automatisé
-│    ├── task_b.py                      → Maintenance des journaux
-│    ├── bridge.php                     → Pont PHP → Python
-│    ├── config.json                    → Fichier de configuration (anonymisé)
-│    ├── state_a.json                   → Registre des identifiants traités
-│    ├── cron_log.txt                   → Sortie des exécutions cron
-│    ├── data/                          → Source de données du worker
-│    ├── logs/                          → Journal des entrées non reconnues
-│    └── tmp/                           → Fichier de contrôle / état
+│    ├── runner.py               → Point d’entrée du worker (cron / déclencheur PHP)
+│    ├── core.py                 → Logique principale du worker
+│    ├── task_a.py               → Traitement automatisé
+│    ├── task_b.py               → Maintenance des journaux
+│    ├── bridge.php              → Pont PHP → Python
+│    ├── settings.json           → Fichier de configuration (anonymisé)
+│    ├── state_a.json            → Registre des identifiants traités
+│    ├── execution.log           → Sortie des exécutions cron
+│    ├── data/                   → Source de données du worker
+│    ├── logs/                   → Journal des entrées non reconnues
+│    └── tmp/                    → Fichier de contrôle / état
 │
 └── site/
      ├── pdf/
-     │    ├── dompdf/                   → Librairie de génération de PDF
-     │    ├── invoices/                 → Factures générées
-     │    ├── recettes/                 → Données de recettes
-     │    ├── processed_stripe_ids.json → Anti-doublon Stripe
-     │    ├── template_invoice.html     → Modèle HTML de facture
-     │    ├── success.html              → Page affichée après paiement réussi
-     │    ├── cancel.html               → Page affichée après paiement annulé
-     │    ├── counter.json              → Compteur de numérotation des factures
-     │    ├── get_counter.php           → Génération du prochain numéro de facture
-     │    ├── lib_pdf.php               → Fonctions de génération PDF
-     │    ├── lib_html.php              → Fonctions utilitaires HTML
-     │    ├── lib_mail.php              → Envoi automatique des factures par e-mail
-     │    └── lib_counter.php           → Fonctions liées au compteur de factures
+     │    ├── engine/            → Moteur de génération de documents
+     │    ├── documents/         → Documents générés
+     │    ├── data/              → Données associées
+     │    ├── processed_ids.json → Registre anti-doublon
+     │    ├── template.html      → Modèle de document
+     │    ├── success.html       → Page de confirmation
+     │    ├── cancel.html        → Page d’annulation
+     │    ├── sequence.json      → Gestion des identifiants
+     │    ├── next_id.php        → Génération du prochain identifiant
+     │    ├── core_pdf.php       → Fonctions internes PDF
+     │    ├── core_html.php      → Fonctions internes HTML
+     │    ├── core_mail.php      → Fonctions internes email
+     │    └── core_sequence.php  → Fonctions internes de numérotation
      │
-     ├── assets/                        → Feuilles de style (externe optionnel)
-     ├── pages/                         → Pages HTML du site (articles et contenus)
-     ├── logs/                          → Journaux d'erreurs
-     ├── images/                        → Images du site (logos et favicons inclus)
-     ├── tmp/                           → Fichier de contrôle / état
-     ├── dl/                            → Store
+     ├── assets/                 → Feuilles de style (externe optionnel)
+     ├── pages/                  → Pages HTML du site (articles et contenus)
+     ├── logs/                   → Journaux d'erreurs
+     ├── images/                 → Images du site (logos et favicons inclus)
+     ├── tmp/                    → Fichier de contrôle / état
+     ├── dl/                     → Store
      │
-     ├── LICENCE.md                     → Conditions d’utilisation et cadre légal
+     ├── LICENCE.md              → Conditions d’utilisation et cadre légal
      │
-     ├── site.webmanifest               → Manifest PWA du site
-     ├── index.html                     → Page d’accueil
-     ├── data_b.json                    → Journal des soumissions d’avis
-     ├── task_a.py                      → Script de nettoyage des logs
-     ├── endpoint_a.php                 → Webhook de paiement Stripe 
-     ├── endpoint_b.php                 → Gestionnaire d’envoi d’avis
-     ├── endpoint_c.php                 → Point d’entrée de téléchargement
-     ├── endpoint_d.php                 → Initialisation du paiement Stripe
-     ├── robots.txt                     → Règles d’indexation pour les moteurs de recherche
-     ├── sitemap.xml                    → Plan du site pour l’indexation
-     ├── data_a.json                    → Jetons temporaires liés aux téléchargements
-     ├── index_hero.js                  → Script d’initialisation du contenu hebdomadaire
-     ├── weekly-2025                    → Données hebdomadaires – année 2025
-     └── weekly-2026                    → Données hebdomadaires – année 2026
+     ├── site.webmanifest        → Manifest PWA du site
+     ├── index.html              → Page d’accueil
+     ├── data_b.json             → Journal des soumissions d’avis
+     ├── task_a.py               → Script de nettoyage des logs
+     ├── endpoint_a.php          → Webhook de paiement Stripe 
+     ├── endpoint_b.php          → Gestionnaire d’envoi d’avis
+     ├── endpoint_c.php          → Point d’entrée de téléchargement
+     ├── endpoint_d.php          → Initialisation du paiement Stripe
+     ├── robots.txt              → Règles d’indexation pour les moteurs de recherche
+     ├── sitemap.xml             → Plan du site pour l’indexation
+     ├── data_a.json             → Jetons temporaires liés aux téléchargements
+     ├── index_hero.js           → Script d’initialisation du contenu hebdomadaire
+     ├── weekly-2025             → Données hebdomadaires – année 2025
+     └── weekly-2026             → Données hebdomadaires – année 2026
 ```
 
 
