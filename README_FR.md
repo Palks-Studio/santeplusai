@@ -74,9 +74,9 @@ sur le long terme.
 
 L’architecture repose sur les blocs suivants :  
 
-- `site/` : site public statique, incluant des points d’entrée serveur protégés  
-- `web/` : zone technique exposée minimale (point d’entrée serveur, règles d’accès)  
-- `worker/` : traitements internes asynchrones (bot, automatisation, maintenance)
+- `santeplusai.fr/` : site public statique, incluant des points d’entrée serveur protégés  
+- `core/` : zone technique exposée minimale (point d’entrée serveur, règles d’accès)  
+- `assistant-node/` : traitements internes asynchrones (bot, automatisation, maintenance)
 
 Chaque sous-système est indépendant sur le plan logique,  
 mais interagit de manière contrôlée avec les autres.
@@ -87,72 +87,75 @@ mais interagit de manière contrôlée avec les autres.
 
 ```
 santeplusai/
-├── web/                         → Fichier de contrôle d’état du système
+├── core/
+│    │
+│    ├── data_counter.json             → Compteur de numérotation des factures
+│    ├── data_tokens.json              → Jetons temporaires liés aux téléchargements
+│    ├── data_config.json              → Fichier de configuration (anonymisé)
+│    ├── logs_reviews.json             → Journal des soumissions d’avis
+│    ├── engine_logs_cleaner.py        → Script de nettoyage des logs
+│    ├── engine_reviews_cleaner.py     → Script de nettoyage des avis
+│    ├── engine_emails_cleaner.py      → Script de nettoyage des mails
+│    ├── data_senders.json             → Suivi des réponses automatiques e-mail
+│    ├── data_stripe.json              → Anti-doublon Stripe
+│    ├── engine_downloads_cleaner.php  → Nettoyage des logs de téléchargements
+│    ├── engine_tokens_cleaner.php     → Nettoyage des jetons expirés
+│    ├── core_counter.php              → Génération du prochain numéro de facture
+│    ├── core_pdf.php                  → Fonctions de génération PDF
+│    ├── core_html.php                 → Fonctions utilitaires HTML
+│    ├── core_mail.php                 → Envoi automatique des factures par e-mail
+│    ├── core_engine.php               → Fonctions liées au compteur
+│    │
+│    ├── renderer/                     → Librairie de génération de PDF
+│    ├── invoices/                     → Factures générées
+│    ├── revenues/                     → Données de recettes
+│    ├── logs/                         → Journaux d’erreurs
+│    └── docs/
+│        ├── GUIDE_CORE.md             → Vue d’ensemble du projet et de son architecture
+│        ├── SYSTEM.md                 → General overview of the project and its architecture
+│        ├── OPERATIONS.md             → Guide d’exploitation et de fonctionnement
+│        └── OVERVIEW.md               → Vue d’ensemble du système
 │
-├── docs/
-│    ├── README_FR.md            → Vue d’ensemble du projet et de son architecture
-│    ├── README.md               → General overview of the project and its architecture
-│    ├── OPERATIONS.md           → Guide d’exploitation et de fonctionnement
-│    └── SYSTEM_OVERVIEW_FR.md   → Vue d’ensemble du système
+├── assistant-node/
+│    ├── engine_main.py                → Point d’entrée du worker (cron / déclencheur PHP)
+│    ├── engine_core.py                → Logique principale du worker
+│    ├── engine_reply.py               → Traitement automatisé
+│    ├── engine_purge.py               → Maintenance des journaux
+│    ├── bridge.php                    → Pont PHP → Python
+│    ├── data/                         → Source de données du worker
+│    └── tmp/                          → Fichier de contrôle / état
 │
-├── worker/
-│    ├── runner.py               → Point d’entrée du worker (cron / déclencheur PHP)
-│    ├── core.py                 → Logique principale du worker
-│    ├── task_a.py               → Traitement automatisé
-│    ├── task_b.py               → Maintenance des journaux
-│    ├── bridge.php              → Pont PHP → Python
-│    ├── settings.json           → Fichier de configuration (anonymisé)
-│    ├── state_a.json            → Registre des identifiants traités
-│    ├── execution.log           → Sortie des exécutions cron
-│    ├── data/                   → Source de données du worker
-│    ├── logs/                   → Journal des entrées non reconnues
-│    └── tmp/                    → Fichier de contrôle / état
-│
-└── site/
+└── santeplusai.fr/
      ├── pdf/
-     │    ├── engine/            → Moteur de génération de documents
-     │    ├── documents/         → Documents générés
-     │    ├── data/              → Données associées
-     │    ├── processed_ids.json → Registre anti-doublon
-     │    ├── template.html      → Modèle de document
-     │    ├── success.html       → Page de confirmation
-     │    ├── cancel.html        → Page d’annulation
-     │    ├── sequence.json      → Gestion des identifiants
-     │    ├── next_id.php        → Génération du prochain identifiant
-     │    ├── core_pdf.php       → Fonctions internes PDF
-     │    ├── core_html.php      → Fonctions internes HTML
-     │    ├── core_mail.php      → Fonctions internes email
-     │    └── core_sequence.php  → Fonctions internes de numérotation
+     │    ├── template_document.html   → Modèle HTML de facture
+     │    ├── success.html             → Page affichée après paiement réussi
+     │    └── cancel.html              → Page affichée après paiement annulé
      │
-     ├── assets/                 → Feuilles de style (externe optionnel)
-     ├── pages/                  → Pages HTML du site (articles et contenus)
-     ├── logs/                   → Journaux d'erreurs
-     ├── images/                 → Images du site (logos et favicons inclus)
-     ├── tmp/                    → Fichier de contrôle / état
-     ├── dl/                     → Store
+     ├── assets/                       → Feuilles de style (externe optionnel)
+     ├── pages/                        → Pages HTML du site (articles et contenus)
+     ├── images/                       → Images du site (logos et favicons inclus)
+     ├── tmp/                          → Fichier de contrôle / état
+     ├── dl/                           → Store
      │
-     ├── LICENCE.md              → Conditions d’utilisation et cadre légal
+     ├── LICENCE.md                    → Conditions d’utilisation et cadre légal
      │
-     ├── site.webmanifest        → Manifest PWA du site
-     ├── index.html              → Page d’accueil
-     ├── data_b.json             → Journal des soumissions d’avis
-     ├── task_a.py               → Script de nettoyage des logs
-     ├── endpoint_a.php          → Webhook de paiement Stripe 
-     ├── endpoint_b.php          → Gestionnaire d’envoi d’avis
-     ├── endpoint_c.php          → Point d’entrée de téléchargement
-     ├── endpoint_d.php          → Initialisation du paiement Stripe
-     ├── robots.txt              → Règles d’indexation pour les moteurs de recherche
-     ├── sitemap.xml             → Plan du site pour l’indexation
-     ├── data_a.json             → Jetons temporaires liés aux téléchargements
-     ├── index_hero.js           → Script d’initialisation du contenu hebdomadaire
-     ├── weekly-2025             → Données hebdomadaires – année 2025
-     └── weekly-2026             → Données hebdomadaires – année 2026
+     ├── site.webmanifest              → Manifest PWA du site
+     ├── index.html                    → Page d’accueil
+     ├── gateway.php                   → Webhook de paiement Stripe
+     ├── reviews.php                   → Gestionnaire d’envoi d’avis
+     ├── download.php                  → Point d’entrée de téléchargement
+     ├── checkout.php                  → Initialisation du paiement Stripe
+     ├── robots.txt                    → Règles d’indexation pour les moteurs de recherche
+     ├── sitemap.xml                   → Plan du site pour l’indexation
+     ├── hero_loader.js                → Script d’initialisation du contenu hebdomadaire
+     ├── messages-2025.js              → Données hebdomadaires – année 2025
+     └── messages-2026.js              → Données hebdomadaires – année 2026
 ```
 
 
 ---
 
-### `site/` — site public statique, incluant des points d’entrée serveur protégés
+### `santeplusai.fr/` — site public statique, incluant des points d’entrée serveur protégés
 
 Ce dossier contient exclusivement le site public : https://santeplusai.fr
 
@@ -165,28 +168,20 @@ Il ne stocke aucune donnée sensible et ne dépend d’aucun service externe.
 
 ---
 
-### `web/` — zone technique exposée minimale
+### `core/` — zone technique exposée minimale
 
-Ce dossier correspond au point d’entrée serveur exposé  
-(`public_html` en environnement de production).
+Ce dossier contient l'ensemble de la logique serveur privée :  
+scripts de traitement, bibliothèques PHP, données JSON,  
+factures générées et journaux internes.
 
-Il ne contient volontairement aucune logique métier  
-et se limite strictement à :  
-
-- règles de contrôle d’accès serveur (`.htaccess`)  
-- fichiers d’état ou de redémarrage technique
-
-Aucun traitement fonctionnel, aucune donnée métier  
-et aucun script applicatif n’y sont présents.
-
-Cette séparation permet de réduire la surface d’attaque  
-et d’isoler strictement le site public et les traitements sensibles.
+Il n'est jamais exposé publiquement et n'est accessible  
+qu'en interne, depuis les scripts et tâches planifiées.
 
 ---
 
-### `worker/` — traitements internes asynchrones
+### `assistant-node/` — traitements internes asynchrones
 
-Le dossier `worker/` contient exclusivement les traitements internes  
+Le dossier `assistant-node/` contient exclusivement les traitements internes  
 exécutés en arrière-plan.
 
 Il correspond à la partie bot / assistant / automatisation Python  
