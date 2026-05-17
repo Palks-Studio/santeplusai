@@ -69,9 +69,9 @@ This organization helps minimize the attack surface, clarify responsibilities, a
 
 The architecture is based on the following blocks:  
 
-- `site/`: public static site, including protected server entry points  
-- `web/`: minimal exposed technical layer (server entry point, access rules)  
-- `worker/`: asynchronous internal processing (bot, automation, maintenance)
+- `santeplusai.fr/`: public static site, including protected server entry points  
+- `core/`: minimal exposed technical layer (server entry point, access rules)  
+- `assistant-node/`: asynchronous internal processing (bot, automation, maintenance)
 
 Each subsystem is logically independent but interacts in a controlled manner with the others.
 
@@ -81,73 +81,75 @@ Each subsystem is logically independent but interacts in a controlled manner wit
 
 ```
 santeplusai/
-├── web/                         → System control / state file
+├── core/ (private)
+│    │
+│    ├── data_counter.json             → Invoice numbering counter
+│    ├── data_tokens.json              → Temporary download tokens
+│    ├── data_config.json              → Configuration file (anonymized)
+│    ├── logs_reviews.json             → Review submission logs
+│    ├── engine_logs_cleaner.py        → Log cleanup script
+│    ├── engine_reviews_cleaner.py     → Review cleanup script
+│    ├── engine_emails_cleaner.py      → Email cleanup script
+│    ├── data_senders.json             → Email auto-reply tracker
+│    ├── data_stripe.json              → Stripe duplicate prevention
+│    ├── engine_downloads_cleaner.php  → Download log cleanup
+│    ├── engine_tokens_cleaner.php     → Expired token cleanup
+│    ├── core_counter.php              → Generates the next invoice number
+│    ├── core_pdf.php                  → PDF generation functions
+│    ├── core_html.php                 → HTML utility functions
+│    ├── core_mail.php                 → Automatic invoice email delivery
+│    ├── core_engine.php               → Counter-related functions
+│    │
+│    ├── renderer/                     → PDF generation library
+│    ├── invoices/                     → Generated invoices
+│    ├── revenues/                     → Revenue data
+│    ├── logs/                         → Error logs
+│    └── docs/
+│        ├── GUIDE_CORE.md             → Project and architecture overview
+│        ├── SYSTEM.md                 → General overview of the project and its architecture
+│        ├── OPERATIONS.md             → Operations and usage guide
+│        └── OVERVIEW.md               → System overview
 │
-├── docs/
-│    ├── README_FR.md            → Vue d’ensemble du projet et de son architecture
-│    ├── README.md               → General overview of the project and its architecture
-│    ├── OPERATIONS.md           → Operations and usage guide
-│    └── SYSTEM_OVERVIEW_FR.md   → System overview
+├── assistant-node/ (public)
+│    ├── engine_main.py                → Worker entry point (cron / PHP trigger)
+│    ├── engine_core.py                → Main worker logic
+│    ├── engine_reply.py               → Automated processing
+│    ├── engine_purge.py               → Log maintenance
+│    ├── bridge.php                    → PHP → Python bridge
+│    ├── data/                         → Worker data source
+│    └── tmp/                          → Control / state file
 │
-├── worker/
-│    ├── runner.py               → Worker entry point (cron / PHP trigger)
-│    ├── core.py                 → Main worker logic
-│    ├── task_a.py               → Automated response processing
-│    ├── task_b.py               → Log maintenance task
-│    ├── bridge.php              → PHP → Python bridge
-│    ├── settings.json           → Configuration file (anonymized)
-│    ├── state_a.json            → Processed identifiers registry
-│    ├── execution.log           → Cron execution output
-│    ├── data/                   → Worker data source
-│    ├── logs/                   → Unmatched entries log
-│    └── tmp/                    → Runtime control / state file
-│
-└── site/
-     │
+└── santeplusai.fr/ (public)
      ├── pdf/
-     │    ├── engine/            → Document generation engine
-     │    ├── documents/         → Generated documents
-     │    ├── data/              → Associated data
-     │    ├── processed_ids.json → Deduplication registry
-     │    ├── template.html      → Document template
-     │    ├── success.html       → Confirmation page
-     │    ├── cancel.html        → Cancellation page
-     │    ├── sequence.json      → Identifier management
-     │    ├── next_id.php        → Next identifier generation
-     │    ├── core_pdf.php       → Internal PDF functions
-     │    ├── core_html.php      → Internal HTML functions
-     │    ├── core_mail.php      → Internal email functions
-     │    └── core_sequence.php  → Internal numbering functions
+     │    ├── template_document.html   → Invoice HTML template
+     │    ├── success.html             → Page displayed after successful payment
+     │    └── cancel.html              → Page displayed after canceled payment
      │
-     ├── assets/                 → Stylesheets (external optional)
-     ├── images/                 → Site images (logos and favicons included)
-     ├── pages/                  → HTML pages (articles and content)
-     ├── logs/                   → Error log
-     ├── tmp/                    → Control / state file
-     ├── dl/                     → Store
+     ├── assets/                       → Stylesheets (optional external)
+     ├── pages/                        → Website pages (articles and content)
+     ├── images/                       → Website images (including logos and favicons)
+     ├── tmp/                          → Control / state file
+     ├── dl/                           → Store
      │
-     ├── LICENSE.md              → Terms of use and legal Framework
+     ├── LICENCE.md                    → Terms of use and legal framework
      │
-     ├── site.webmanifest        → Site web manifest
-     ├── index.html              → Home page
-     ├── data_b.json             → Review submission log
-     ├── task_a.py               → Log cleanup script
-     ├── endpoint_a.php          → Stripe payment webhook
-     ├── endpoint_b.php          → Review submission handler
-     ├── endpoint_c.php          → Secure download endpoint 
-     ├── endpoint_d.php          → Stripe checkout initializer
-     ├── robots.txt              → Search engine indexing rules
-     ├── sitemap.xml             → Sitemap for indexing
-     ├── data_a.json             → Temporary download tokens
-     ├── index_hero.js           → Weekly content initialization script
-     ├── weekly-2025             → Weekly data – year 2025
-     └── weekly-2026             → Weekly data – year 2026
+     ├── site.webmanifest              → Website PWA manifest
+     ├── index.html                    → Homepage
+     ├── gateway.php                   → Stripe payment webhook
+     ├── reviews.php                   → Review submission handler
+     ├── download.php                  → Download entry point
+     ├── checkout.php                  → Stripe payment initialization
+     ├── robots.txt                    → Search engine indexing rules
+     ├── sitemap.xml                   → Sitemap for indexing
+     ├── hero_loader.js                → Weekly content initialization script
+     ├── messages-2025.js              → Weekly data – year 2025
+     └── messages-2026.js              → Weekly data – year 2026
 ```
 
 
 ---
 
-### `site/` — Public Layer
+### `santeplusai.fr/` — Public Layer
 
 This folder contains exclusively the public site: https://santeplusai.fr
 
@@ -162,28 +164,20 @@ they are never directly accessible and are strictly protected by server-level ru
 
 ---
 
-### `web/` — Minimal Exposed Technical Layer
+### `core/` — Minimal Exposed Technical Layer
 
-This folder corresponds to the exposed server entry point  
-(`public_html` in the production environment).
+This folder contains the entire private server logic:  
+processing scripts, PHP libraries, JSON data,  
+generated invoices and internal logs.
 
-It intentionally contains no business logic  
-and is strictly limited to:  
-
-- server access control rules (`.htaccess`)  
-- technical state or restart files
-
-No functional processing, no business data,  
-and no application scripts are present in this layer.
-
-This separation helps reduce the attack surface  
-and strictly isolate the public site from sensitive processing.
+It is never publicly exposed and is only accessible  
+internally, from scripts and scheduled tasks.
 
 ---
 
-### `worker/` — Internal Automation
+### `assistant-node/` — Internal Automation
 
-The `worker/` folder contains internal processes that run in the background, with no public exposure.  
+The `assistant-node/` folder contains internal processes that run in the background, with no public exposure.  
 These scripts are triggered solely via scheduled tasks or internal server calls.
 
 They handle, among other things:  
