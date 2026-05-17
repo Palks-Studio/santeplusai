@@ -100,7 +100,6 @@ santeplusai/
 │    ├── data_stripe.json              → Anti-doublon Stripe
 │    ├── engine_downloads_cleaner.php  → Nettoyage des logs de téléchargements
 │    ├── engine_tokens_cleaner.php     → Nettoyage des jetons expirés
-│    ├── core_counter.php              → Génération du prochain numéro de facture
 │    ├── core_pdf.php                  → Fonctions de génération PDF
 │    ├── core_html.php                 → Fonctions utilitaires HTML
 │    ├── core_mail.php                 → Envoi automatique des factures par e-mail
