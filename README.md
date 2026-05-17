@@ -81,7 +81,7 @@ Each subsystem is logically independent but interacts in a controlled manner wit
 
 ```
 santeplusai/
-├── core/ (private)
+├── core/
 │    │
 │    ├── data_counter.json             → Invoice numbering counter
 │    ├── data_tokens.json              → Temporary download tokens
@@ -110,7 +110,7 @@ santeplusai/
 │        ├── OPERATIONS.md             → Operations and usage guide
 │        └── OVERVIEW.md               → System overview
 │
-├── assistant-node/ (public)
+├── assistant-node/
 │    ├── engine_main.py                → Worker entry point (cron / PHP trigger)
 │    ├── engine_core.py                → Main worker logic
 │    ├── engine_reply.py               → Automated processing
@@ -119,7 +119,7 @@ santeplusai/
 │    ├── data/                         → Worker data source
 │    └── tmp/                          → Control / state file
 │
-└── santeplusai.fr/ (public)
+└── santeplusai.fr/
      ├── pdf/
      │    ├── template_document.html   → Invoice HTML template
      │    ├── success.html             → Page displayed after successful payment
