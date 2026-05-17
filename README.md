@@ -94,7 +94,6 @@ santeplusai/
 │    ├── data_stripe.json              → Stripe duplicate prevention
 │    ├── engine_downloads_cleaner.php  → Download log cleanup
 │    ├── engine_tokens_cleaner.php     → Expired token cleanup
-│    ├── core_counter.php              → Generates the next invoice number
 │    ├── core_pdf.php                  → PDF generation functions
 │    ├── core_html.php                 → HTML utility functions
 │    ├── core_mail.php                 → Automatic invoice email delivery
